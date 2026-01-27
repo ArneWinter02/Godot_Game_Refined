@@ -232,8 +232,8 @@ radius = 4.0
 
 [node name="Player" type="CharacterBody2D" groups=["player"]]
 scale = Vector2(2, 2)
-platform_floor_layers = 4294901777
-platform_wall_layers = 17
+platform_floor_layers = 4294901809
+platform_wall_layers = 49
 script = SubResource("GDScript_vgqql")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
