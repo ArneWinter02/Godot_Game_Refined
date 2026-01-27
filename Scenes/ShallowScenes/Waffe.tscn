@@ -29,3 +29,4 @@ one_shot = true
 stream = ExtResource("3_6dj31")
 volume_db = -10.0
 pitch_scale = 1.5
+bus = &"SFX"
