@@ -27,9 +27,7 @@ var dir
 signal shoot(_pos: Vector2, dir: Vector2) 
 signal reload()
 
-
-@onready var ui = $UI/Control/MarginContainer/VBoxContainer
-@onready var pausescreen = preload(\"res://Scenes/UserInterface/pause_screen.tscn\").instantiate()
+@onready var pausescreen = preload(\"res://Scenes/UserInterface/pause_screen.tscn\")
 @onready var animated_sprite = $AnimatedSprite2D
 @onready var timer = $\"Timer&Sounds/LocalReload\"
 @onready var lebensbalken = $UI/Leben/HealthBar
@@ -93,6 +91,9 @@ func _ready() -> void:
 
 
 func _physics_process(_float):
+	if Input.is_action_just_pressed(\"MenuButton\"):
+		get_tree().paused = true
+		pausescreen.instantiate()
 	if cur_ammo >=0:
 		ammo_calc()
 	else:
@@ -101,7 +102,7 @@ func _physics_process(_float):
 	velocity = direction * speed
 	animation()
 	move_and_slide()
-	menu_button()
+
 
 func _on_local_reload_timeout() -> void:
 	munitionLabl.text = str(cur_ammo)+ \"/\" + str(max_ammo)
@@ -130,11 +131,6 @@ func death():
 
 func _on_deathtimer_timeout() -> void:
 	get_tree().change_scene_to_file(\"res://Scenes/UserInterface/EndScreen.tscn\")
-
-func menu_button():
-	if Input.is_action_just_pressed(\"MenuButton\"):
-		ui.add_child(pausescreen)
-		get_tree().paused = true
 "
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ik7gq"]
@@ -302,7 +298,6 @@ stream_0/stream = ExtResource("5_rj054")
 stream_1/stream = ExtResource("6_3vsyq")
 
 [node name="Player" type="CharacterBody2D" groups=["player"]]
-position = Vector2(532, 316)
 scale = Vector2(2, 2)
 collision_layer = 49
 collision_mask = 49

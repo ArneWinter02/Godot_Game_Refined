@@ -1,3 +1,3 @@
-# Mein erster Projekt
+# Mein erstes Projekt
 
 ## BITTE NETT SEIN

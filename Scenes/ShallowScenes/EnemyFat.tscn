@@ -63,7 +63,7 @@ streams_count = 2
 stream_0/stream = ExtResource("6_4u8mt")
 stream_1/stream = ExtResource("7_wkuhx")
 
-[node name="Fatrat" type="CharacterBody2D"]
+[node name="Fatrat" type="CharacterBody2D" groups=["enemy"]]
 motion_mode = 1
 script = ExtResource("1_p0qna")
 healthpoints = 30.0

@@ -63,7 +63,7 @@ animations = [{
 atlas = ExtResource("4_2kj8t")
 region = Rect2(106, 108, 7, 6)
 
-[node name="Rat_gunner" type="CharacterBody2D"]
+[node name="Rat_gunner" type="CharacterBody2D" groups=["enemy"]]
 top_level = true
 position = Vector2(80, 75)
 script = ExtResource("1_kwbg6")

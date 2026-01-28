@@ -404,6 +404,10 @@ position = Vector2(3, -3.5)
 top_level = true
 position = Vector2(-54, -55)
 
+[node name="CollisionShape2D" parent="Player" index="0"]
+visible = false
+position = Vector2(0.4375, 0)
+
 [node name="Camera2D" parent="Player" index="4"]
 limit_right = 767
 

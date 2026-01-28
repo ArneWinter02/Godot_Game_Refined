@@ -8,7 +8,8 @@ var checker = 0
 func _ready() -> void:
 	$MenuScreenFade.show()
 	$MenuScreenFade/AnimationTree.play("fade_out")
-
+	Global.musicChecker = "Level"
+	
 func _process(_delta: float) -> void:
 	if curMusicChecker != Global.musicChecker:
 		curMusicChecker = Global.musicChecker

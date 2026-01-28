@@ -7,6 +7,7 @@
 [ext_resource type="AudioStream" uid="uid://dh37jh7sq2l4r" path="res://assets/Music/Level/it-takes-initiative-444628.mp3" id="5_i7hgc"]
 
 [sub_resource type="AudioStreamPlaylist" id="AudioStreamPlaylist_vd0cr"]
+shuffle = true
 stream_count = 3
 stream_0 = ExtResource("3_faxs0")
 stream_1 = ExtResource("4_gydhr")
