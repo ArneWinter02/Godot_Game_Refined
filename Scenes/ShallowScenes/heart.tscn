@@ -93,6 +93,7 @@ pitch_scale = 3.0
 scale = Vector2(0.5, 0.5)
 sprite_frames = SubResource("SpriteFrames_m6w4j")
 animation = &"Herz"
+autoplay = "Herz"
 frame_progress = 0.42753103
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

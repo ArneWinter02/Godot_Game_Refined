@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=3 uid="uid://c0unbanf4wa0g"]
+[gd_scene load_steps=34 format=3 uid="uid://c0unbanf4wa0g"]
 
 [ext_resource type="Texture2D" uid="uid://b4p8cdu3dsal0" path="res://Bilder/Bilder/Plague_doktor.png" id="1_cvnsp"]
 [ext_resource type="PackedScene" uid="uid://b32h5x6mjro2a" path="res://Scenes/ShallowScenes/Hurtbox.tscn" id="4_1nc73"]
@@ -7,7 +7,6 @@
 [ext_resource type="AudioStream" uid="uid://dsqjtlkh6ejr4" path="res://assets/SFX/HurtSound/grunt2.mp3" id="5_rj054"]
 [ext_resource type="AudioStream" uid="uid://bk4ml6inpjh48" path="res://assets/SFX/HurtSound/male_hurt.mp3" id="6_3vsyq"]
 [ext_resource type="AudioStream" uid="uid://dh0h6bwm5bqy2" path="res://assets/SFX/HurtSound/man-death-scream.mp3" id="8_rc6nt"]
-[ext_resource type="PackedScene" uid="uid://dama8h2ffsnvm" path="res://Scenes/UserInterface/pause_screen.tscn" id="9_5rpka"]
 [ext_resource type="PackedScene" uid="uid://cn21lfo4rqsxy" path="res://Scenes/UserInterface/MenuScreenFade.tscn" id="9_rc6nt"]
 [ext_resource type="PackedScene" uid="uid://ci1bu4rieieq4" path="res://Scenes/UserInterface/User-Helper.tscn" id="10_5rpka"]
 
@@ -28,8 +27,7 @@ var dir
 signal shoot(_pos: Vector2, dir: Vector2) 
 signal reload()
 
-
-@onready var pause_screen = $UI/Control/MarginContainer/VBoxContainer/PauseScreen
+@onready var pausescreen = preload(\"res://Scenes/UserInterface/pause_screen.tscn\")
 @onready var animated_sprite = $AnimatedSprite2D
 @onready var timer = $\"Timer&Sounds/LocalReload\"
 @onready var lebensbalken = $UI/Leben/HealthBar
@@ -74,7 +72,6 @@ func update_healthbar(heal):
 		lebensbalken.value = healthcur
 		return healthcur
 
-
 func ammo_calc():
 	if not timer.is_stopped():
 		return
@@ -86,21 +83,17 @@ func ammo_calc():
 			munitionLabl.text = str(0) + \"/\" + str(max_ammo)
 	elif Input.is_action_just_pressed(\"reload\") and cur_ammo<max_ammo:
 		ammo_update()
-
-
 func ammo_update():
 	timer.start()
 	cur_ammo = max_ammo
-
-
 func _ready() -> void:
 	pass
 
 
 func _physics_process(_float):
 	if Input.is_action_just_pressed(\"MenuButton\"):
-		pause_screen.visible = true
 		get_tree().paused = true
+		pausescreen.instantiate()
 	if cur_ammo >=0:
 		ammo_calc()
 	else:
@@ -111,15 +104,13 @@ func _physics_process(_float):
 	move_and_slide()
 
 
-
 func _on_local_reload_timeout() -> void:
 	munitionLabl.text = str(cur_ammo)+ \"/\" + str(max_ammo)
 
 
 func _on_pickuparea_area_entered(area: Area2D) -> void:
 	if area.is_in_group(\"loot\"):
-		if not healthcur >= healthpoints:
-			area.target = self
+		area.target = self
 
 
 func _on_collectarea_area_entered(area: Area2D) -> void:
@@ -140,17 +131,6 @@ func death():
 
 func _on_deathtimer_timeout() -> void:
 	get_tree().change_scene_to_file(\"res://Scenes/UserInterface/EndScreen.tscn\")
-
-
-func _on_resume_pressed() -> void:
-	pause_screen.visible = false
-	get_tree().paused = false
-
-func _on_main_menu_pressed() -> void:
-	MenuScreenFade.show()
-	$MenuScreenFade/AnimationTree.play(\"fade_in\")
-	get_tree().paused = false
-	get_tree().change_scene_to_file(\"res://Scenes/UserInterface/Main_menu.tscn\")
 "
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ik7gq"]
@@ -318,7 +298,6 @@ stream_0/stream = ExtResource("5_rj054")
 stream_1/stream = ExtResource("6_3vsyq")
 
 [node name="Player" type="CharacterBody2D" groups=["player"]]
-position = Vector2(532, 316)
 scale = Vector2(2, 2)
 collision_layer = 49
 collision_mask = 49
@@ -385,10 +364,6 @@ shape = SubResource("CircleShape2D_2ttdi")
 [node name="MunitionLabel" parent="UI/Munition/VBoxContainer" index="0"]
 text = ""
 
-[node name="PauseScreen" parent="UI/Control/MarginContainer/VBoxContainer" index="0" instance=ExtResource("9_5rpka")]
-visible = false
-layout_mode = 2
-
 [node name="MenuScreenFade" parent="." instance=ExtResource("9_rc6nt")]
 visible = false
 offset_left = -1272.0
@@ -423,13 +398,9 @@ bus = &"SFX"
 [connection signal="timeout" from="Node2D/reload" to="." method="_on_reload_timeout"]
 [connection signal="area_entered" from="pickuparea" to="." method="_on_pickuparea_area_entered"]
 [connection signal="area_entered" from="collectarea" to="." method="_on_collectarea_area_entered"]
-[connection signal="pressed" from="UI/Control/MarginContainer/VBoxContainer/PauseScreen/Control/Panel/MenuContainer/Resume" to="." method="_on_resume_pressed"]
-[connection signal="pressed" from="UI/Control/MarginContainer/VBoxContainer/PauseScreen/Control/Panel/MenuContainer/Main Menu" to="." method="_on_main_menu_pressed"]
 [connection signal="timeout" from="Timer&Sounds/Deathtimer" to="." method="_on_deathtimer_timeout"]
 [connection signal="timeout" from="Timer&Sounds/LocalReload" to="." method="_on_local_reload_timeout"]
 
 [editable path="Hurtbox"]
 [editable path="Node2D"]
 [editable path="UI"]
-[editable path="UI/Control/MarginContainer/VBoxContainer/PauseScreen"]
-[editable path="MenuScreenFade"]

@@ -91,7 +91,7 @@ streams_count = 2
 stream_0/stream = ExtResource("6_mlcix")
 stream_1/stream = ExtResource("7_v2mp0")
 
-[node name="Enemy_Ratte2" type="CharacterBody2D"]
+[node name="Enemy_Ratte2" type="CharacterBody2D" groups=["enemy"]]
 motion_mode = 1
 script = ExtResource("1_db84r")
 speed = 80.0
