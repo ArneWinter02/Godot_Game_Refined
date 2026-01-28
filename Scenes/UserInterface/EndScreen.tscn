@@ -1,0 +1,67 @@
+[gd_scene load_steps=4 format=3 uid="uid://wt56mjo3ukvu"]
+
+[ext_resource type="Script" uid="uid://uhgodl4bus6v" path="res://Scripts/end_screen.gd" id="1_k5k1t"]
+[ext_resource type="PackedScene" uid="uid://cn21lfo4rqsxy" path="res://Scenes/UserInterface/MenuScreenFade.tscn" id="2_xnwbh"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_goxvd"]
+font_size = 64
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_k5k1t")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -640.0
+offset_right = 640.0
+offset_bottom = 720.0
+grow_horizontal = 2
+
+[node name="HSeparator" type="HSeparator" parent="VBoxContainer"]
+modulate = Color(1, 1, 1, 0)
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VBoxContainer"]
+light_mask = 128
+visibility_layer = 128
+custom_minimum_size = Vector2(400, 200)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+text = "GAME OVER"
+label_settings = SubResource("LabelSettings_goxvd")
+horizontal_alignment = 1
+
+[node name="TextureRect" type="ColorRect" parent="VBoxContainer/Label"]
+show_behind_parent = true
+clip_contents = true
+custom_minimum_size = Vector2(0, 200)
+layout_mode = 0
+offset_left = -440.0
+offset_top = -104.0
+offset_right = 840.0
+offset_bottom = 616.0
+color = Color(0, 0, 0, 1)
+
+[node name="retry" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="MainMenu" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="MenuScreenFade" parent="." instance=ExtResource("2_xnwbh")]
+visible = false
+layout_mode = 1
+offset_left = -920.0
+offset_top = -977.0
+offset_right = 928.0
+offset_bottom = 1233.0
