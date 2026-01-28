@@ -24,3 +24,6 @@ func collect():
 
 func _on_pickup_finished() -> void:
 	queue_free()
+func heal(heal):
+	heal = health
+	return heal
