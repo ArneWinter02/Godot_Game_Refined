@@ -31,6 +31,7 @@ outline_size = 5
 outline_color = Color(0, 0, 0, 1)
 
 [node name="PauseScreen" type="Control"]
+process_mode = 3
 layout_mode = 3
 anchors_preset = 0
 script = ExtResource("1_o30hj")
@@ -114,5 +115,7 @@ offset_top = -348.0
 offset_right = 326.0
 offset_bottom = 367.0
 
-[connection signal="pressed" from="Control/Panel/MenuContainer/Resume" to="." method="_on_resume_pressed"]
-[connection signal="pressed" from="Control/Panel/MenuContainer/Main Menu" to="." method="_on_main_menu_pressed"]
+[connection signal="mouse_entered" from="Control/Panel/MenuContainer/Resume" to="." method="_on_resume_mouse_entered"]
+[connection signal="mouse_exited" from="Control/Panel/MenuContainer/Resume" to="." method="_on_resume_mouse_exited"]
+[connection signal="mouse_entered" from="Control/Panel/MenuContainer/Main Menu" to="." method="_on_main_menu_mouse_entered"]
+[connection signal="mouse_exited" from="Control/Panel/MenuContainer/Main Menu" to="." method="_on_main_menu_mouse_exited"]

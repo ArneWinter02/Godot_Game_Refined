@@ -11,7 +11,6 @@ var death_anim = preload("res://Scenes/ShallowScenes/deathanimation.tscn")
 signal remove_from_array(object) 
 
 func _physics_process(_delta: float):
-	
 	var direction = global_position.direction_to(player.global_position)
 	velocity = direction*speed
 	move_and_slide()

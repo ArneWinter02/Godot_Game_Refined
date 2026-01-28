@@ -28,8 +28,8 @@ var dir
 signal shoot(_pos: Vector2, dir: Vector2) 
 signal reload()
 
-
-@onready var pause_screen = $UI/Control/MarginContainer/VBoxContainer/PauseScreen
+@onready var ui = $UI/Control/MarginContainer/VBoxContainer
+@onready var pausescreen = preload(\"res://Scenes/UserInterface/pause_screen.tscn\").instantiate()
 @onready var animated_sprite = $AnimatedSprite2D
 @onready var timer = $\"Timer&Sounds/LocalReload\"
 @onready var lebensbalken = $UI/Leben/HealthBar
@@ -99,8 +99,7 @@ func _ready() -> void:
 
 func _physics_process(_float):
 	if Input.is_action_just_pressed(\"MenuButton\"):
-		pause_screen.visible = true
-		get_tree().paused = true
+		pass
 	if cur_ammo >=0:
 		ammo_calc()
 	else:
@@ -118,8 +117,7 @@ func _on_local_reload_timeout() -> void:
 
 func _on_pickuparea_area_entered(area: Area2D) -> void:
 	if area.is_in_group(\"loot\"):
-		if not healthcur >= healthpoints:
-			area.target = self
+		area.target = self
 
 
 func _on_collectarea_area_entered(area: Area2D) -> void:
@@ -140,17 +138,6 @@ func death():
 
 func _on_deathtimer_timeout() -> void:
 	get_tree().change_scene_to_file(\"res://Scenes/UserInterface/EndScreen.tscn\")
-
-
-func _on_resume_pressed() -> void:
-	pause_screen.visible = false
-	get_tree().paused = false
-
-func _on_main_menu_pressed() -> void:
-	MenuScreenFade.show()
-	$MenuScreenFade/AnimationTree.play(\"fade_in\")
-	get_tree().paused = false
-	get_tree().change_scene_to_file(\"res://Scenes/UserInterface/Main_menu.tscn\")
 "
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ik7gq"]
@@ -386,7 +373,7 @@ shape = SubResource("CircleShape2D_2ttdi")
 text = ""
 
 [node name="PauseScreen" parent="UI/Control/MarginContainer/VBoxContainer" index="0" instance=ExtResource("9_5rpka")]
-visible = false
+process_mode = 3
 layout_mode = 2
 
 [node name="MenuScreenFade" parent="." instance=ExtResource("9_rc6nt")]
@@ -423,8 +410,6 @@ bus = &"SFX"
 [connection signal="timeout" from="Node2D/reload" to="." method="_on_reload_timeout"]
 [connection signal="area_entered" from="pickuparea" to="." method="_on_pickuparea_area_entered"]
 [connection signal="area_entered" from="collectarea" to="." method="_on_collectarea_area_entered"]
-[connection signal="pressed" from="UI/Control/MarginContainer/VBoxContainer/PauseScreen/Control/Panel/MenuContainer/Resume" to="." method="_on_resume_pressed"]
-[connection signal="pressed" from="UI/Control/MarginContainer/VBoxContainer/PauseScreen/Control/Panel/MenuContainer/Main Menu" to="." method="_on_main_menu_pressed"]
 [connection signal="timeout" from="Timer&Sounds/Deathtimer" to="." method="_on_deathtimer_timeout"]
 [connection signal="timeout" from="Timer&Sounds/LocalReload" to="." method="_on_local_reload_timeout"]
 
@@ -432,4 +417,3 @@ bus = &"SFX"
 [editable path="Node2D"]
 [editable path="UI"]
 [editable path="UI/Control/MarginContainer/VBoxContainer/PauseScreen"]
-[editable path="MenuScreenFade"]
