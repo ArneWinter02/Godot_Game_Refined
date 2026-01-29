@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://bipcr6wlyq0e8"]
 
-[ext_resource type="Texture2D" uid="uid://dgiphnmarj1tp" path="res://Bilder/Bilder/Fatrat.png" id="1_kqcyw"]
-[ext_resource type="Script" uid="uid://q7loi1fx2ssa" path="res://Scripts/rat_gun.gd" id="1_vr4l5"]
+[ext_resource type="Texture2D" uid="uid://dgiphnmarj1tp" path="res://Bilder/Tilemaps/Fatrat.png" id="1_kqcyw"]
+[ext_resource type="Script" uid="uid://q7loi1fx2ssa" path="res://Scripts/Enemies/rat_gun.gd" id="1_vr4l5"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ef3ix"]
 atlas = ExtResource("1_kqcyw")

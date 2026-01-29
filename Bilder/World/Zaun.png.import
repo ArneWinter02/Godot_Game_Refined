@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bevemjid4ptc8"
-path="res://.godot/imported/Übergrangs_Tile.png-249d1dfc6a794861c237f90ce29ead20.ctex"
+uid="uid://dbs2w326n2myh"
+path="res://.godot/imported/Zaun.png-ae2a85370c821589e8b1400bf1620cb7.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Bilder/Bilder/Übergrangs_Tile.png"
-dest_files=["res://.godot/imported/Übergrangs_Tile.png-249d1dfc6a794861c237f90ce29ead20.ctex"]
+source_file="res://Bilder/World/Zaun.png"
+dest_files=["res://.godot/imported/Zaun.png-ae2a85370c821589e8b1400bf1620cb7.ctex"]
 
 [params]
 

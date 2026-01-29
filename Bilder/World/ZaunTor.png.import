@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://di0e4xnpjlske"
-path="res://.godot/imported/kugel.png-1c92c0e226a4d1b0ffed3468b97bb7ac.ctex"
+uid="uid://dg50v2ocap8mn"
+path="res://.godot/imported/ZaunTor.png-639f0f135126a1260b15e78cf2bd8b1e.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Bilder/Bilder/kugel.png"
-dest_files=["res://.godot/imported/kugel.png-1c92c0e226a4d1b0ffed3468b97bb7ac.ctex"]
+source_file="res://Bilder/World/ZaunTor.png"
+dest_files=["res://.godot/imported/ZaunTor.png-639f0f135126a1260b15e78cf2bd8b1e.ctex"]
 
 [params]
 

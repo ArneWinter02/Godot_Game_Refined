@@ -1,5 +1,5 @@
 extends Area2D
-
+signal remove_from_array(object) 
 
 
 var speed: int = 400
@@ -10,8 +10,7 @@ var attack_size = 1.0
 var target = Vector2.ZERO
 var angle = Vector2.ZERO
 
-@onready var Player = preload("res://Scenes/ShallowScenes/Waffe.tscn")
-@onready var hitbox = $"."
+
 @export var damage = 10.0
 @onready var collision = $CollisionShape2D
 @onready var disabletimer = $disablehitboxtimer
@@ -22,3 +21,8 @@ func tempdisable():
 
 func _on_disablehitboxtimer_timeout():
 	collision.call_deferred("set","disabled",false)
+func enemy_hit(charge = 1):
+	hp-=charge
+	if hp <= 0:
+		emit_signal("remove_from_array",self)
+		queue_free()

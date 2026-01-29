@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://mk5gstxah2s8"
-path="res://.godot/imported/Jagdgewehr.png-0c70511df1c71bb70ae409d855349b98.ctex"
+uid="uid://23q28nrlu3pn"
+path="res://.godot/imported/Hohlspitzgeschoss.png-5662216adcdf21cd11709ec97a29c94d.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Bilder/Bilder/Jagdgewehr.png"
-dest_files=["res://.godot/imported/Jagdgewehr.png-0c70511df1c71bb70ae409d855349b98.ctex"]
+source_file="res://Bilder/Items/Hohlspitzgeschoss.png"
+dest_files=["res://.godot/imported/Hohlspitzgeschoss.png-5662216adcdf21cd11709ec97a29c94d.ctex"]
 
 [params]
 

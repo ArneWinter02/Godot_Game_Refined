@@ -1,6 +1,6 @@
 [gd_scene load_steps=13 format=3 uid="uid://c3bqr43kg446f"]
 
-[ext_resource type="Script" uid="uid://di3c0irg4ggh4" path="res://Scripts/heart.gd" id="1_aua5x"]
+[ext_resource type="Script" uid="uid://di3c0irg4ggh4" path="res://Scripts/World/heart.gd" id="1_aua5x"]
 [ext_resource type="Texture2D" uid="uid://c5ndpkc8lma3g" path="res://Bilder/Items/Herzen_pickup.png" id="2_4o77q"]
 [ext_resource type="AudioStream" uid="uid://bdqh0fmhq0t2a" path="res://assets/SFX/health-pickup.mp3" id="2_pxhl0"]
 
@@ -86,8 +86,8 @@ script = ExtResource("1_aua5x")
 
 [node name="pickup" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("2_pxhl0")
-volume_db = -30.0
-pitch_scale = 3.0
+volume_db = -10.0
+pitch_scale = 2.0
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 scale = Vector2(0.5, 0.5)

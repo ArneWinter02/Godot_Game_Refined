@@ -7,9 +7,11 @@ func _ready() -> void:
 
 
 func _on_retry_pressed() -> void:
-	pass # Replace with function body.
+	get_tree().paused = false
+	get_tree().change_scene_to_file("res://Scenes/DeeperScene/Beginning.tscn")
 
 func _on_main_menu_2_pressed() -> void:
 	checker = 1
 	if checker == 1:
 		get_tree().change_scene_to_file("res://Scenes/UserInterface/Main_menu.tscn")
+		get_tree().paused = false

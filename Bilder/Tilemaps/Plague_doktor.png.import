@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bm1sng5qu6xdr"
-path="res://.godot/imported/Strandgras_TILE.png-fbe84357c155b4eaafaa299ae11fdeed.ctex"
+uid="uid://b4p8cdu3dsal0"
+path="res://.godot/imported/Plague_doktor.png-f05d30d9a130b09e38a3eec3a317e49f.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Bilder/Bilder/Strandgras_TILE.png"
-dest_files=["res://.godot/imported/Strandgras_TILE.png-fbe84357c155b4eaafaa299ae11fdeed.ctex"]
+source_file="res://Bilder/Tilemaps/Plague_doktor.png"
+dest_files=["res://.godot/imported/Plague_doktor.png-f05d30d9a130b09e38a3eec3a317e49f.ctex"]
 
 [params]
 

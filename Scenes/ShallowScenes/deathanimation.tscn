@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=3 uid="uid://mikpv1g5lq5n"]
 
-[ext_resource type="Texture2D" uid="uid://dshe24eesxj7u" path="res://Bilder/Bilder/explosion_pixelfied.png" id="1_w1hdg"]
-[ext_resource type="Script" uid="uid://b6d6ujlcf56ci" path="res://Scripts/Stats für Spieler und Gegner/deathanimation.gd" id="2_p41xk"]
+[ext_resource type="Texture2D" uid="uid://dshe24eesxj7u" path="res://Bilder/Tilemaps/explosion_pixelfied.png" id="1_w1hdg"]
+[ext_resource type="Script" uid="uid://b6d6ujlcf56ci" path="res://Scripts/Enemies/deathanimation.gd" id="2_p41xk"]
 [ext_resource type="AudioStream" uid="uid://dj3alijv7g2rt" path="res://assets/SFX/medium-explosion-40472.mp3" id="3_ubxfn"]
 
 [sub_resource type="Animation" id="Animation_8qoa3"]

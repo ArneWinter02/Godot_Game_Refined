@@ -8,6 +8,7 @@ func _ready() -> void:
 	$MenuScreenFade.show()
 	$MenuScreenFade/AnimationTree.play("fade_out")
 
+
 func _process(_delta: float) -> void:
 	if curMusicChecker != Global.musicChecker:
 		curMusicChecker = Global.musicChecker

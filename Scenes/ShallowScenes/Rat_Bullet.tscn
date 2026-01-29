@@ -1,8 +1,8 @@
 [gd_scene load_steps=7 format=3 uid="uid://c477hchgxem1u"]
 
 [ext_resource type="AudioStream" uid="uid://dft0axe4hmbdj" path="res://assets/SFX/Rat_Gunshot.mp3" id="1_lwl4h"]
-[ext_resource type="Script" uid="uid://b8nmn5p04fth1" path="res://Scripts/rat_bullet.gd" id="1_qkp54"]
-[ext_resource type="Texture2D" uid="uid://dgiphnmarj1tp" path="res://Bilder/Bilder/Fatrat.png" id="2_qkp54"]
+[ext_resource type="Script" uid="uid://b8nmn5p04fth1" path="res://Scripts/Enemies/rat_bullet.gd" id="1_qkp54"]
+[ext_resource type="Texture2D" uid="uid://dgiphnmarj1tp" path="res://Bilder/Tilemaps/Fatrat.png" id="2_qkp54"]
 [ext_resource type="PackedScene" uid="uid://xfbnk5g2f1pp" path="res://Scenes/ShallowScenes/hitbox.tscn" id="3_xufml"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_jqfe5"]

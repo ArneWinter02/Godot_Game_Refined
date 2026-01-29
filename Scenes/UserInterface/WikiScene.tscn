@@ -1,8 +1,8 @@
 [gd_scene load_steps=16 format=3 uid="uid://dqqv1uw5es1dp"]
 
-[ext_resource type="Script" uid="uid://da33rqamksoj8" path="res://Scripts/wiki_scene.gd" id="1_6aptq"]
-[ext_resource type="Texture2D" uid="uid://bbwryyyd0vusv" path="res://Bilder/Bilder/MenuHintergrund.png" id="2_t5ini"]
-[ext_resource type="Texture2D" uid="uid://cuadvu6ndsw4x" path="res://Bilder/Bilder/User_Interface.png" id="3_pv48h"]
+[ext_resource type="Script" uid="uid://da33rqamksoj8" path="res://Scripts/World/wiki_scene.gd" id="1_6aptq"]
+[ext_resource type="Texture2D" uid="uid://bbwryyyd0vusv" path="res://Bilder/Tilemaps/MenuHintergrund.png" id="2_t5ini"]
+[ext_resource type="Texture2D" uid="uid://cuadvu6ndsw4x" path="res://Bilder/Tilemaps/User_Interface.png" id="3_pv48h"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_eit4r"]
 texture = ExtResource("3_pv48h")

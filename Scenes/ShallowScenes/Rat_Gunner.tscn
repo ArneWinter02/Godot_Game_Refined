@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://xfbnk5g2f1pp" path="res://Scenes/ShallowScenes/hitbox.tscn" id="1_oclob"]
 [ext_resource type="AudioStream" uid="uid://bxqh6enh2cpit" path="res://assets/SFX/Squeak_1.mp3" id="2_2kj8t"]
 [ext_resource type="AudioStream" uid="uid://0xuuq1lqfxl8" path="res://assets/SFX/Squeak_2.mp3" id="3_2pwpe"]
-[ext_resource type="Texture2D" uid="uid://dgiphnmarj1tp" path="res://Bilder/Bilder/Fatrat.png" id="4_2kj8t"]
+[ext_resource type="Texture2D" uid="uid://dgiphnmarj1tp" path="res://Bilder/Tilemaps/Fatrat.png" id="4_2kj8t"]
 [ext_resource type="PackedScene" uid="uid://bipcr6wlyq0e8" path="res://Scenes/ShallowScenes/Rat_gun.tscn" id="5_2pwpe"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_kwbg6"]

@@ -1,7 +1,7 @@
 [gd_scene load_steps=10 format=3 uid="uid://dama8h2ffsnvm"]
 
-[ext_resource type="Script" uid="uid://bhsb483qpnqsh" path="res://Scripts/pause_screen.gd" id="1_o30hj"]
-[ext_resource type="Texture2D" uid="uid://cuadvu6ndsw4x" path="res://Bilder/Bilder/User_Interface.png" id="2_bcgjs"]
+[ext_resource type="Script" uid="uid://bhsb483qpnqsh" path="res://Scripts/Interface/pause_screen.gd" id="1_o30hj"]
+[ext_resource type="Texture2D" uid="uid://cuadvu6ndsw4x" path="res://Bilder/Tilemaps/User_Interface.png" id="2_bcgjs"]
 [ext_resource type="PackedScene" uid="uid://cn21lfo4rqsxy" path="res://Scenes/UserInterface/MenuScreenFade.tscn" id="3_3ss8b"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_3ss8b"]

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b0oduhtc5b58g"
-path="res://.godot/imported/Arrow.png.png-7f80fa4e081cf55fee06a811e28cdcb3.ctex"
+uid="uid://dgiphnmarj1tp"
+path="res://.godot/imported/Fatrat.png-0092b9fb6c0506b3c9c735cee7548790.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Bilder/Bilder/Arrow.png.png"
-dest_files=["res://.godot/imported/Arrow.png.png-7f80fa4e081cf55fee06a811e28cdcb3.ctex"]
+source_file="res://Bilder/Tilemaps/Fatrat.png"
+dest_files=["res://.godot/imported/Fatrat.png-0092b9fb6c0506b3c9c735cee7548790.ctex"]
 
 [params]
 
