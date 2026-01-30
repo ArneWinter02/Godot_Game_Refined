@@ -447,7 +447,7 @@ texture = ExtResource("16_w5bcp")
 position = Vector2(680, -36)
 
 [node name="Polygon2D" type="CollisionPolygon2D" parent="Tilemaps/Übergang_Tiles/Deko/Deko_Collision2/Node"]
-polygon = PackedVector2Array(0, 0, 0, 20, 38, 20, 38, -50, 0, -50, 0, -71, 38, -71, 40, -71, 40, 21, 0, 22)
+polygon = PackedVector2Array(0, 0, 38, 0, 38, 20, 38, -50, 0, -50, 0, -71, 38, -71, 40, -71, 40, 21, 0, 21)
 
 [node name="Player" parent="." instance=ExtResource("1_oa8wt")]
 position = Vector2(-27, 12)

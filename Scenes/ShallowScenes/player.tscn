@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=3 uid="uid://c0unbanf4wa0g"]
+[gd_scene load_steps=34 format=3 uid="uid://c0unbanf4wa0g"]
 
 [ext_resource type="Texture2D" uid="uid://b4p8cdu3dsal0" path="res://Bilder/Tilemaps/Plague_doktor.png" id="1_cvnsp"]
 [ext_resource type="PackedScene" uid="uid://b32h5x6mjro2a" path="res://Scenes/ShallowScenes/Hurtbox.tscn" id="4_1nc73"]
@@ -6,7 +6,6 @@
 [ext_resource type="PackedScene" uid="uid://o7qc7uhlib0y" path="res://Scenes/ShallowScenes/Waffe.tscn" id="4_vgqql"]
 [ext_resource type="AudioStream" uid="uid://dsqjtlkh6ejr4" path="res://assets/SFX/HurtSound/grunt2.mp3" id="5_rj054"]
 [ext_resource type="AudioStream" uid="uid://bk4ml6inpjh48" path="res://assets/SFX/HurtSound/male_hurt.mp3" id="6_3vsyq"]
-[ext_resource type="AudioStream" uid="uid://wqklmpd1avc6" path="res://assets/SFX/level-up-191997.mp3" id="6_5rpka"]
 [ext_resource type="AudioStream" uid="uid://dh0h6bwm5bqy2" path="res://assets/SFX/HurtSound/man-death-scream.mp3" id="8_rc6nt"]
 [ext_resource type="PackedScene" uid="uid://dama8h2ffsnvm" path="res://Scenes/UserInterface/pause_screen.tscn" id="9_5rpka"]
 [ext_resource type="PackedScene" uid="uid://cn21lfo4rqsxy" path="res://Scenes/UserInterface/MenuScreenFade.tscn" id="9_rc6nt"]
@@ -398,9 +397,6 @@ position = Vector2(0.25, 0)
 shape = SubResource("RectangleShape2D_2ttdi")
 debug_color = Color(7.219613e-08, 0.20953652, 0.2507157, 0.41960785)
 
-[node name="DisableTimer" parent="Hurtbox" index="1"]
-wait_time = 0.001
-
 [node name="Node2D" parent="." instance=ExtResource("4_vgqql")]
 position = Vector2(0.5, -0.5)
 
@@ -438,9 +434,6 @@ text = ""
 [node name="pause_screen" parent="UI/Control/MarginContainer/VBoxContainer" index="0" instance=ExtResource("9_5rpka")]
 visible = false
 layout_mode = 2
-
-[node name="RewardSound" parent="UI/Reward" index="2"]
-stream = ExtResource("6_5rpka")
 
 [node name="MenuScreenFade" parent="." instance=ExtResource("9_rc6nt")]
 visible = false
