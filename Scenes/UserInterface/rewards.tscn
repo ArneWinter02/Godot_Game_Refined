@@ -57,6 +57,7 @@ offset_right = 779.0
 offset_bottom = 42.0
 text = "Name"
 label_settings = SubResource("LabelSettings_d563b")
+autowrap_mode = 3
 
 [node name="ItemDescrip" type="Label" parent="."]
 layout_mode = 0
@@ -74,6 +75,7 @@ offset_left = 598.0
 offset_right = 754.0
 offset_bottom = 46.0
 label_settings = SubResource("LabelSettings_wye1m")
+autowrap_mode = 3
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 
