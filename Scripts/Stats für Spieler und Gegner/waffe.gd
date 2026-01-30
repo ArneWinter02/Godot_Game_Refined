@@ -3,13 +3,13 @@ extends Node2D
 const bullet_scene = preload("res://Scenes/ShallowScenes/bullet.tscn")
 
 @onready var marker_2d: Marker2D = $Marker2D
-@onready var sprite_2d: Sprite2D = $Sprite2D
+@onready var sprite_2d = $Sprite2D
 @onready var sound = $ReloadSound
 
-var max_fire_rate: float = 0.20
-var cur_fire_rate = max_fire_rate
-var max_ammo: int = 10
-var cur_ammo: = max_ammo
+@export var max_fire_rate: float = 0.20
+@export var cur_fire_rate = max_fire_rate
+@export var max_ammo: int = 10
+@export var cur_ammo: = max_ammo
 
 
 func reload():

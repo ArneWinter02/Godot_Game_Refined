@@ -1,0 +1,34 @@
+[gd_scene load_steps=4 format=3 uid="uid://dawtlem3rqnx4"]
+
+[ext_resource type="Script" uid="uid://ceu4v45i8kk04" path="res://Scripts/Stats für Spieler und Gegner/m_110_gewehr.gd" id="1_pk3t6"]
+[ext_resource type="Texture2D" uid="uid://bcu2wdcybem7u" path="res://Bilder/Items/M110Gewehr.png" id="2_pk3t6"]
+[ext_resource type="AudioStream" uid="uid://c7iw32oons6xs" path="res://assets/SFX/gun-full-reload.mp3" id="3_8ss1o"]
+
+[node name="Node2D" type="Node2D"]
+script = ExtResource("1_pk3t6")
+max_fire_rate = 0.15
+max_ammo = 25
+
+[node name="Marker2D" type="Marker2D" parent="."]
+position = Vector2(7.3, 0)
+gizmo_extents = 0.0
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(1.2, 0)
+scale = Vector2(0.32957956, 0.26562497)
+texture = ExtResource("2_pk3t6")
+region_enabled = true
+region_rect = Rect2(1, 13, 37, 13)
+
+[node name="fire_rate" type="Timer" parent="."]
+wait_time = 0.2
+
+[node name="reload" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
+
+[node name="ReloadSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_8ss1o")
+volume_db = -10.0
+pitch_scale = 1.5
+bus = &"SFX"

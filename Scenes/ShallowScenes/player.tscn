@@ -18,11 +18,11 @@ script/source = "extends CharacterBody2D
 @export var ammo_used = 1
 var cur_ammo = max_ammo
 # UI Health vars
-@onready var healthpoints = 60.0
-@onready var healthcur = healthpoints
+@export var healthpoints = 60.0
+@export var healthcur = healthpoints
+@export var speed = 100
 
 var direction: Vector2 = Vector2(1,1)
-@export var speed: int = 100
 var dir
 
 
@@ -32,10 +32,16 @@ signal reload()
 
 @onready var pause_screen = $UI/Control/MarginContainer/VBoxContainer/pause_screen
 @onready var animated_sprite = $AnimatedSprite2D
+
+#UI related Variables
 @onready var timer = $\"Timer&Sounds/LocalReload\"
 @onready var lebensbalken = $UI/Leben/HealthBar
 @onready var munitionLabl = $UI/Munition/VBoxContainer/MunitionLabel
+
+#Hurtsound
 @onready var sound = $\"Timer&Sounds/HurtSnd\"
+
+#Death System
 @onready var deathsound = $\"Timer&Sounds/Deathsound\"
 @onready var MenuScreenFade = $MenuScreenFade
 @onready var deathtimer = $\"Timer&Sounds/Deathtimer\"
@@ -49,6 +55,9 @@ signal reload()
 @onready var RewardSound = $UI/Reward/RewardSound
 @onready var RewardOptions = preload(\"res://Scenes/UserInterface/rewards.tscn\")
 @export var rewards_for_kills_ini = 3
+var collected_rewards = []
+var rewards_options = []
+
 
 
 func animation():
@@ -167,13 +176,14 @@ func _on_main_menu_pressed() -> void:
 func reward():
 	RewardSound.play()
 	var tween = RewardPanel.create_tween()
-	tween.tween_property(RewardPanel,\"position\", Vector2(525.0,100.0),0.2).set_trans(Tween.TRANS_QUINT).set_ease(Tween.EASE_IN)
+	tween.tween_property(RewardPanel,\"position\", Vector2(200.0,100.0),0.2).set_trans(Tween.TRANS_QUINT).set_ease(Tween.EASE_IN)
 	tween.play()
 	RewardPanel.visible = true
 	var options = 0
 	var optionsmax = 3
 	while options<optionsmax:
 		var option_choice = RewardOptions.instantiate()
+		option_choice.item = get_random_reward()
 		RewardContainer.add_child(option_choice)
 		options += 1
 	get_tree().paused = true
@@ -183,6 +193,8 @@ func reward_character(reward):
 	var reward_children = RewardContainer.get_children()
 	for i in reward_children:
 		i.queue_free()
+	rewards_options.clear()
+	collected_rewards.append(reward)
 	RewardPanel.visible = false
 	RewardPanel.position = Vector2(1600,100)
 	get_tree().paused = false
@@ -196,6 +208,30 @@ func reward_for_killing():
 	elif Global.enemies == rewards_accum:
 		rewards_accum += rewards_accum
 		reward()
+
+func get_random_reward():
+	var dblist = []
+	for i in RewardDataBase.REWARDS:
+		if i in collected_rewards:
+			pass
+		elif i in rewards_options:
+			pass
+		elif RewardDataBase.REWARDS[i][\"type\"] == \"boots\":
+			pass
+		elif RewardDataBase.REWARDS[i][\"prerequisite\"].size() > 0:
+			for n in RewardDataBase.REWARDS[i][\"prerequisite\"]:
+				if not n in collected_rewards:
+					pass
+				else:
+					dblist.append(i)
+		else:
+			dblist.append(i)
+	if dblist.size() > 0:
+		var randomReward = dblist.pick_random()
+		rewards_options.append(randomReward)
+		return randomReward
+	else:
+		return null
 "
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ik7gq"]
@@ -371,6 +407,7 @@ collision_mask = 49
 platform_floor_layers = 4294901809
 platform_wall_layers = 49
 script = SubResource("GDScript_vgqql")
+rewards_for_kills_ini = 1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0.1875, -1.25)

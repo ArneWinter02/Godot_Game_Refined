@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://sgsbb3ehb0af"]
+
+[ext_resource type="Script" uid="uid://bfvaaqw73uiy5" path="res://Scripts/Interface/reward_data_base.gd" id="1_c2ckx"]
+
+[node name="RewardDataBase" type="Node"]
+script = ExtResource("1_c2ckx")

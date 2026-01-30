@@ -1,4 +1,4 @@
-extends Area2D
+extends Node2D
 signal remove_from_array(object) 
 
 var speed: int = 400

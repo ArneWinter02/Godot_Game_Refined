@@ -67,7 +67,7 @@ stream_1/stream = ExtResource("7_wkuhx")
 motion_mode = 1
 script = ExtResource("1_p0qna")
 healthpoints = 30.0
-speed = 60.0
+speed = 50.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_u7cdh")
