@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bu2ypscxchp6m"
-path="res://.godot/imported/Strand_Tileset.png-fae1225147e14f5210ebfaf50383fae8.ctex"
+uid="uid://st2apn33680q"
+path="res://.godot/imported/Ratte.png-21de828b42449f71c75c91125c43e8e3.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Bilder/Bilder/Strand_Tileset.png"
-dest_files=["res://.godot/imported/Strand_Tileset.png-fae1225147e14f5210ebfaf50383fae8.ctex"]
+source_file="res://Bilder/Tilemaps/Ratte.png"
+dest_files=["res://.godot/imported/Ratte.png-21de828b42449f71c75c91125c43e8e3.ctex"]
 
 [params]
 

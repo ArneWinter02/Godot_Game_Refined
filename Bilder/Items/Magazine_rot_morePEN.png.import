@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dshe24eesxj7u"
-path="res://.godot/imported/explosion_pixelfied.png-d9bead757436be84cd93136f07605028.ctex"
+uid="uid://1nrbo1ull74j"
+path="res://.godot/imported/Magazine_rot_morePEN.png-468c88dbc51645d73cfb94890622b2cc.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Bilder/Bilder/explosion_pixelfied.png"
-dest_files=["res://.godot/imported/explosion_pixelfied.png-d9bead757436be84cd93136f07605028.ctex"]
+source_file="res://Bilder/Items/Magazine_rot_morePEN.png"
+dest_files=["res://.godot/imported/Magazine_rot_morePEN.png-468c88dbc51645d73cfb94890622b2cc.ctex"]
 
 [params]
 

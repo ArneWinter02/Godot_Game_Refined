@@ -1,7 +1,7 @@
 [gd_scene load_steps=9 format=3 uid="uid://bgnup486vu1f0"]
 
-[ext_resource type="Script" uid="uid://uhgodl4bus6v" path="res://Scripts/end_screen.gd" id="1_k5k1t"]
-[ext_resource type="Texture2D" uid="uid://cuadvu6ndsw4x" path="res://Bilder/Bilder/User_Interface.png" id="2_2ipes"]
+[ext_resource type="Script" uid="uid://uhgodl4bus6v" path="res://Scripts/Interface/end_screen.gd" id="1_k5k1t"]
+[ext_resource type="Texture2D" uid="uid://cuadvu6ndsw4x" path="res://Bilder/Tilemaps/User_Interface.png" id="2_2ipes"]
 [ext_resource type="PackedScene" uid="uid://cn21lfo4rqsxy" path="res://Scenes/UserInterface/MenuScreenFade.tscn" id="2_xnwbh"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_goxvd"]
@@ -25,6 +25,7 @@ outline_size = 5
 outline_color = Color(0, 0, 0, 1)
 
 [node name="Control" type="Node2D"]
+process_mode = 3
 script = ExtResource("1_k5k1t")
 
 [node name="Control" type="Control" parent="."]

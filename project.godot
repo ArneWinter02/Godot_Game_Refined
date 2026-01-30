@@ -18,7 +18,7 @@ config/features=PackedStringArray("4.5", "Forward Plus")
 
 Global="*res://Scripts/Stats für Spieler und Gegner/Global.gd"
 BackroundMusic="*res://Scenes/UserInterface/Backround_Music.tscn"
-Bullet="res://Scripts/bullet.gd"
+Bullet="res://Scripts/Stats für Spieler und Gegner/bullet.gd"
 
 [display]
 
@@ -36,6 +36,7 @@ enabled=PackedStringArray("res://addons/TileMapDual/plugin.cfg")
 player="Spieler Gruppe"
 transition=""
 enemy=""
+attack=""
 
 [input]
 

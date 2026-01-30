@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b4p8cdu3dsal0"
-path="res://.godot/imported/Plague_doktor.png-2ba49553cf25beff0d6e68effab85927.ctex"
+uid="uid://bu2ypscxchp6m"
+path="res://.godot/imported/Strand_Tileset.png-da9ad6bddfea54d0d7a270e969ff285e.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Bilder/Bilder/Plague_doktor.png"
-dest_files=["res://.godot/imported/Plague_doktor.png-2ba49553cf25beff0d6e68effab85927.ctex"]
+source_file="res://Bilder/Tilemaps/Strand_Tileset.png"
+dest_files=["res://.godot/imported/Strand_Tileset.png-da9ad6bddfea54d0d7a270e969ff285e.ctex"]
 
 [params]
 

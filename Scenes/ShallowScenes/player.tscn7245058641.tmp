@@ -1,6 +1,6 @@
 [gd_scene load_steps=34 format=3 uid="uid://c0unbanf4wa0g"]
 
-[ext_resource type="Texture2D" uid="uid://b4p8cdu3dsal0" path="res://Bilder/Tilemaps/Plague_doktor.png" id="1_cvnsp"]
+[ext_resource type="Texture2D" uid="uid://b4p8cdu3dsal0" path="res://Bilder/Bilder/Plague_doktor.png" id="1_cvnsp"]
 [ext_resource type="PackedScene" uid="uid://b32h5x6mjro2a" path="res://Scenes/ShallowScenes/Hurtbox.tscn" id="4_1nc73"]
 [ext_resource type="PackedScene" uid="uid://b5kakulprxmw2" path="res://Scenes/UserInterface/ui.tscn" id="4_2ttdi"]
 [ext_resource type="PackedScene" uid="uid://o7qc7uhlib0y" path="res://Scenes/ShallowScenes/Waffe.tscn" id="4_vgqql"]
@@ -48,7 +48,7 @@ signal reload()
 @onready var RewardContainer = $UI/Reward/RewardContainer
 @onready var RewardSound = $UI/Reward/RewardSound
 @onready var RewardOptions = preload(\"res://Scenes/UserInterface/rewards.tscn\")
-@export var rewards_for_kills_ini = 3
+var Num_Enemies = 0
 
 
 func animation():
@@ -62,6 +62,10 @@ func animation():
 		elif dir.x < 0:
 			animated_sprite.play(\"idle_left\")
 
+func calculate_enemies():
+	if get_tree().is_in_group(\"enemy\"):
+		Num_Enemies += 1
+		print(Num_Enemies)
 
 func _on_hurtbox_hurt(damage):
 	healthcur -= damage
@@ -105,7 +109,7 @@ func ammo_update():
 
 
 func _ready() -> void:
-	reward_for_killing()
+	pass
 
 
 func _physics_process(_float):
@@ -120,7 +124,6 @@ func _physics_process(_float):
 	velocity = direction * speed
 	animation()
 	move_and_slide()
-	reward_for_killing()
 
 
 func _on_local_reload_timeout() -> void:
@@ -145,8 +148,8 @@ func death():
 	deathsound.play()
 	MenuScreenFade.show()
 	$MenuScreenFade/AnimationTree.play(\"fade_in\")
-	get_tree().paused = true
 	deathtimer.start()
+
 
 
 func _on_deathtimer_timeout() -> void:
@@ -179,27 +182,22 @@ func reward():
 	get_tree().paused = true
 
 func reward_character(reward):
-	Global.enemies += 1
 	var reward_children = RewardContainer.get_children()
 	for i in reward_children:
 		i.queue_free()
 	RewardPanel.visible = false
 	RewardPanel.position = Vector2(1600,100)
 	get_tree().paused = false
+	calculate_enemies()
 
 
-func reward_for_killing():
-	var rewards_accum = 30
-	if Global.enemies == rewards_for_kills_ini:
-		rewards_for_kills_ini += rewards_accum 
-		reward()
-	elif Global.enemies == rewards_accum:
-		rewards_accum += rewards_accum
-		reward()
+
+func _on_initial_timer_timeout() -> void:
+	reward()
 "
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ik7gq"]
-size = Vector2(1.875, 7.5)
+size = Vector2(1.875, 5)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_5rpka"]
 atlas = ExtResource("1_cvnsp")
@@ -352,7 +350,7 @@ animations = [{
 size = Vector2(2.5, 6)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_s8yk7"]
-radius = 12.010412
+radius = 17.00735
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_2ttdi"]
 radius = 3.0
@@ -363,7 +361,6 @@ stream_0/stream = ExtResource("5_rj054")
 stream_1/stream = ExtResource("6_3vsyq")
 
 [node name="Player" type="CharacterBody2D" groups=["player"]]
-z_index = 1
 position = Vector2(532, 316)
 scale = Vector2(2, 2)
 collision_layer = 49
@@ -373,7 +370,7 @@ platform_wall_layers = 49
 script = SubResource("GDScript_vgqql")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0.1875, -1.25)
+position = Vector2(0.1875, 0)
 shape = SubResource("RectangleShape2D_ik7gq")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
@@ -445,12 +442,10 @@ offset_bottom = 928.0
 [node name="Timer&Sounds" type="Node2D" parent="."]
 
 [node name="Deathtimer" type="Timer" parent="Timer&Sounds"]
-process_mode = 3
 wait_time = 1.5
 one_shot = true
 
 [node name="Deathsound" type="AudioStreamPlayer" parent="Timer&Sounds"]
-process_mode = 3
 stream = ExtResource("8_rc6nt")
 volume_db = -5.0
 pitch_scale = 1.2
@@ -465,6 +460,13 @@ stream = SubResource("AudioStreamRandomizer_vq6bo")
 pitch_scale = 1.5
 bus = &"SFX"
 
+[node name="InitialTimer" type="Timer" parent="Timer&Sounds"]
+wait_time = 5.0
+autostart = true
+
+[node name="AfterEnemyTimer" type="Timer" parent="Timer&Sounds"]
+wait_time = 3.0
+
 [connection signal="hurt" from="Hurtbox" to="." method="_on_hurtbox_hurt"]
 [connection signal="timeout" from="Node2D/reload" to="." method="_on_reload_timeout"]
 [connection signal="area_entered" from="pickuparea" to="." method="_on_pickuparea_area_entered"]
@@ -473,6 +475,7 @@ bus = &"SFX"
 [connection signal="pressed" from="UI/Control/MarginContainer/VBoxContainer/pause_screen/Control/Panel/MenuContainer/Main Menu" to="." method="_on_main_menu_pressed"]
 [connection signal="timeout" from="Timer&Sounds/Deathtimer" to="." method="_on_deathtimer_timeout"]
 [connection signal="timeout" from="Timer&Sounds/LocalReload" to="." method="_on_local_reload_timeout"]
+[connection signal="timeout" from="Timer&Sounds/InitialTimer" to="." method="_on_initial_timer_timeout"]
 
 [editable path="Hurtbox"]
 [editable path="Node2D"]

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://st2apn33680q"
-path="res://.godot/imported/Ratte.png-ac0ba60e3cceabde53d2b58615fc94e5.ctex"
+uid="uid://c3emu2vucvqaf"
+path="res://.godot/imported/Crocs.png-9204939a36f8031cf8ca23544953c32a.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Bilder/Bilder/Ratte.png"
-dest_files=["res://.godot/imported/Ratte.png-ac0ba60e3cceabde53d2b58615fc94e5.ctex"]
+source_file="res://Bilder/Items/Crocs.png"
+dest_files=["res://.godot/imported/Crocs.png-9204939a36f8031cf8ca23544953c32a.ctex"]
 
 [params]
 
