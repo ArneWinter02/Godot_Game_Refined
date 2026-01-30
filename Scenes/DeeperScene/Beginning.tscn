@@ -15,7 +15,6 @@
 [ext_resource type="PackedScene" uid="uid://b0gcu2ajiwhkk" path="res://Scenes/ShallowScenes/map_limitations.tscn" id="13_alt6u"]
 [ext_resource type="PackedScene" uid="uid://cx5h32uy8dv4j" path="res://Scenes/ShallowScenes/EnemySpawner.tscn" id="14_nusmd"]
 [ext_resource type="PackedScene" uid="uid://cfi4byf3j0j05" path="res://Scenes/ShallowScenes/Map_transistor.tscn" id="16_6vlrc"]
-[ext_resource type="PackedScene" uid="uid://c3bqr43kg446f" path="res://Scenes/ShallowScenes/heart.tscn" id="16_w5bcp"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_i3tni"]
 texture = ExtResource("7_i3tni")
@@ -412,9 +411,6 @@ position = Vector2(-138, -62)
 
 [node name="CollisionPolygon2D" parent="Map_Limitations" index="0"]
 polygon = PackedVector2Array(2, 0, 15, 156, 45, 259, 87, 428, 142, 491, 254, 526, 415, 537, 878, 534, 876, 374, 871, 274, 880, 172, 877, 55, 908, 51, 908, -37, 877, -39, 875, -134, 875, -394, 419, -393, 175, -359, 28, -249, 6, -40, -66, -40, -16, -341, 208, -445, 904, -451, 923, -222, 957, 437, 943, 570, 553, 647, 129, 593, -24, 143, -52, -5, -65, -39, 5, -39)
-
-[node name="Heart" parent="." instance=ExtResource("16_w5bcp")]
-position = Vector2(17, -50)
 
 [connection signal="body_entered" from="Map_Transition" to="." method="_on_map_transition_body_entered"]
 [connection signal="timeout" from="MenuScreenFade/ScreenFadeTimer" to="." method="_on_screen_fade_timer_timeout"]
