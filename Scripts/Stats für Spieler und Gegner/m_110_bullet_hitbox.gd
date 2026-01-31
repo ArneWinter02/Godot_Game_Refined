@@ -2,9 +2,9 @@ extends Area2D
 signal remove_from_array(object) 
 
 
-@export var speed: int = 400
+@export var speed: int = 450
 var level: int
-@export var hp = 1.0
+@export var hp = 4.0
 var knockback_amount = 100
 @export var attack_size = 1.0
 var target = Vector2.ZERO

@@ -95,6 +95,7 @@ stream_1/stream = ExtResource("7_v2mp0")
 z_index = 1
 motion_mode = 1
 script = ExtResource("1_db84r")
+healthpoints = 25.0
 speed = 65.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

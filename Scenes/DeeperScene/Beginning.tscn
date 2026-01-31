@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=4 uid="uid://wf2x8rrsaw1l"]
+[gd_scene load_steps=33 format=4 uid="uid://wf2x8rrsaw1l"]
 
 [ext_resource type="PackedScene" uid="uid://c0unbanf4wa0g" path="res://Scenes/ShallowScenes/player.tscn" id="1_oa8wt"]
 [ext_resource type="Script" uid="uid://co6tdsoxw5urp" path="res://Scripts/World/beginning.gd" id="1_opek6"]
@@ -20,24 +20,56 @@
 
 [sub_resource type="Resource" id="Resource_2yjik"]
 script = ExtResource("12_alt6u")
-time_start = 1
-time_end = 30
+time_start = 5
+time_end = 60
 enemy = ExtResource("11_w5bcp")
-enemy_num = 1
-enemy_spawn_delay = 1
+enemy_num = 2
+enemy_spawn_delay = 2
 metadata/_custom_type_script = "uid://bum422lrbyv46"
 
 [sub_resource type="Resource" id="Resource_nusmd"]
 script = ExtResource("12_alt6u")
-time_start = 1
-time_end = 30
+time_start = 5
+time_end = 60
 enemy = ExtResource("14_nusmd")
 enemy_num = 1
-enemy_spawn_delay = 1
+enemy_spawn_delay = 3
 metadata/_custom_type_script = "uid://bum422lrbyv46"
 
 [sub_resource type="Resource" id="Resource_6vlrc"]
 script = ExtResource("12_alt6u")
+time_start = 60
+time_end = 90
+enemy = ExtResource("11_w5bcp")
+enemy_num = 3
+enemy_spawn_delay = 2
+metadata/_custom_type_script = "uid://bum422lrbyv46"
+
+[sub_resource type="Resource" id="Resource_w5bcp"]
+script = ExtResource("12_alt6u")
+time_start = 60
+time_end = 90
+enemy = ExtResource("14_nusmd")
+enemy_num = 2
+enemy_spawn_delay = 3
+metadata/_custom_type_script = "uid://bum422lrbyv46"
+
+[sub_resource type="Resource" id="Resource_gn6w8"]
+script = ExtResource("12_alt6u")
+time_start = 90
+time_end = 120
+enemy = ExtResource("11_w5bcp")
+enemy_num = 4
+enemy_spawn_delay = 3
+metadata/_custom_type_script = "uid://bum422lrbyv46"
+
+[sub_resource type="Resource" id="Resource_nyyt7"]
+script = ExtResource("12_alt6u")
+time_start = 90
+time_end = 120
+enemy = ExtResource("14_nusmd")
+enemy_num = 3
+enemy_spawn_delay = 4
 metadata/_custom_type_script = "uid://bum422lrbyv46"
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_i3tni"]
@@ -293,7 +325,7 @@ polygon = PackedVector2Array(2, 0, 15, 156, 45, 259, 87, 428, 142, 491, 254, 526
 [node name="EnemySpawner" parent="." instance=ExtResource("11_k88m2")]
 z_index = 1
 position = Vector2(1, 0)
-spawns = Array[ExtResource("12_alt6u")]([SubResource("Resource_2yjik"), SubResource("Resource_nusmd"), SubResource("Resource_6vlrc")])
+spawns = Array[ExtResource("12_alt6u")]([SubResource("Resource_2yjik"), SubResource("Resource_nusmd"), SubResource("Resource_6vlrc"), SubResource("Resource_w5bcp"), SubResource("Resource_gn6w8"), SubResource("Resource_nyyt7")])
 
 [node name="Tilemaps" type="Node2D" parent="."]
 metadata/_edit_lock_ = true
@@ -459,7 +491,8 @@ position = Vector2(0.4375, 0)
 [node name="Camera2D" parent="Player" index="4"]
 limit_right = 767
 
-[node name="Node2D" type="Node2D" parent="."]
+[node name="Sprite2D" parent="Player/Node2D2" index="1"]
+z_index = 1
 
 [connection signal="body_entered" from="Map_Transition" to="." method="_on_map_transition_body_entered"]
 [connection signal="timeout" from="MenuScreenFade/ScreenFadeTimer" to="." method="_on_screen_fade_timer_timeout"]
@@ -475,3 +508,4 @@ limit_right = 767
 [editable path="Player/UI"]
 [editable path="Player/UI/Control/MarginContainer/VBoxContainer/pause_screen"]
 [editable path="Player/MenuScreenFade"]
+[editable path="Player/Node2D2"]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://bgnup486vu1f0"]
+[gd_scene load_steps=10 format=3 uid="uid://bgnup486vu1f0"]
 
 [ext_resource type="Script" uid="uid://uhgodl4bus6v" path="res://Scripts/Interface/end_screen.gd" id="1_k5k1t"]
 [ext_resource type="Texture2D" uid="uid://cuadvu6ndsw4x" path="res://Bilder/Tilemaps/User_Interface.png" id="2_2ipes"]
@@ -20,6 +20,11 @@ texture = ExtResource("2_2ipes")
 region_rect = Rect2(54, 167, 102, 24)
 
 [sub_resource type="LabelSettings" id="LabelSettings_djvot"]
+font_size = 18
+outline_size = 5
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_xnwbh"]
 font_size = 18
 outline_size = 5
 outline_color = Color(0, 0, 0, 1)
@@ -130,6 +135,16 @@ offset_right = 150.0
 offset_bottom = 50.5
 text = "Main Menu"
 label_settings = SubResource("LabelSettings_djvot")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Ratskilled" type="Label" parent="Control"]
+layout_mode = 0
+offset_left = 526.0
+offset_top = 315.0
+offset_right = 754.0
+offset_bottom = 401.0
+label_settings = SubResource("LabelSettings_xnwbh")
 horizontal_alignment = 1
 vertical_alignment = 1
 

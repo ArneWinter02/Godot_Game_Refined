@@ -7,7 +7,13 @@ var entered = false
 
 func _ready() -> void:
 	Global.musicChecker = "Menu"
-	
+	Global.enemies = 0
+	Global.BulletDamage = 0
+	Global.bulletHP = 0
+	Global.BulletSpeed = 0
+	Global.max_muni = 0
+	Global.reload_speed = 0
+	Global.bonus_movespeed = 0
 func update_music_scene():
 	var curMusic = str(curMusicChecker)
 	print(curMusic)

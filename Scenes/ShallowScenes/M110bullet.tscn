@@ -26,6 +26,9 @@ autoplay = true
 bus = &"SFX"
 
 [node name="Node2D" parent="." instance=ExtResource("3_25kvo")]
+speed = 450
+hp = 4.0
+attack_size = 1.0
 
 [node name="CollisionShape2D" parent="Node2D" index="0"]
 position = Vector2(0, -0.75)

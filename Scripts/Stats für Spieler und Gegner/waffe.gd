@@ -8,14 +8,16 @@ const bullet_scene = preload("res://Scenes/ShallowScenes/bullet.tscn")
 
 @export var max_fire_rate: float = 0.20
 @export var cur_fire_rate = max_fire_rate
-@export var max_ammo: int = 10
-@export var cur_ammo: = max_ammo
+@export var max_ammo = 10
+@export var cur_ammo = max_ammo
 
+
+func _ready() -> void:
+	cur_ammo = max_ammo
 
 func reload():
 	$reload.start()
 	cur_ammo = max_ammo
-
 func shoot():
 	if not $reload.is_stopped():
 		return

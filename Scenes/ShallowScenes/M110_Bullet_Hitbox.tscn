@@ -6,8 +6,7 @@
 collision_layer = 4
 collision_mask = 4
 script = ExtResource("1_mw3xv")
-speed = 450
-hp = 2.0
+damage = 25.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 

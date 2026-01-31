@@ -3,12 +3,12 @@ extends Node2D
 const bullet_scene = preload("res://Scenes/ShallowScenes/M110bullet.tscn")
 
 @onready var marker_2d: Marker2D = $Marker2D
-@onready var sprite_2d: Sprite2D = $Sprite2D
+@onready var m110 = $Sprite2D
 @onready var sound = $ReloadSound
 
-@export var max_fire_rate: float = 0.20
+@export var max_fire_rate: float = 0.15
 @export var cur_fire_rate = max_fire_rate
-@export var max_ammo: int = 10
+@export var max_ammo: int = 20
 @export var cur_ammo: = max_ammo
 
 
@@ -36,7 +36,7 @@ func _physics_process(_delta: float) -> void:
 	if get_global_mouse_position().x > 0:
 		pass
 	elif get_global_mouse_position().x < 0:
-		sprite_2d.flip_h
+		m110.flip_h
 	if not $reload.is_stopped():
 		return
 	if Input.is_action_just_pressed("shoot"):
