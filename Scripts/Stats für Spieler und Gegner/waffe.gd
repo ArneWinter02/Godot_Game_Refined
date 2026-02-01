@@ -8,16 +8,18 @@ const bullet_scene = preload("res://Scenes/ShallowScenes/bullet.tscn")
 
 @export var max_fire_rate: float = 0.20
 @export var cur_fire_rate = max_fire_rate
-@export var max_ammo = 10
+@export var max_ammo = 10 
 @export var cur_ammo = max_ammo
+@onready var main = $"."
+
 
 
 func _ready() -> void:
-	cur_ammo = max_ammo
-
+	pass
 func reload():
 	$reload.start()
 	cur_ammo = max_ammo
+	
 func shoot():
 	if not $reload.is_stopped():
 		return
@@ -50,3 +52,5 @@ func _physics_process(_delta: float) -> void:
 	elif Input.is_action_just_pressed("reload") and cur_ammo<max_ammo:
 		reload()
 		sound.play()
+	if max_ammo < Global.max_muni:
+		max_ammo += 5

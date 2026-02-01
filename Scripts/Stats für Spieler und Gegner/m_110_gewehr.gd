@@ -8,7 +8,7 @@ const bullet_scene = preload("res://Scenes/ShallowScenes/M110bullet.tscn")
 
 @export var max_fire_rate: float = 0.15
 @export var cur_fire_rate = max_fire_rate
-@export var max_ammo: int = 20
+@export var max_ammo: int = 25
 @export var cur_ammo: = max_ammo
 
 

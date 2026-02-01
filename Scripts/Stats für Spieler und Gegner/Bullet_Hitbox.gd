@@ -5,7 +5,7 @@ var hp = 1.0
 var target = Vector2.ZERO
 var angle = Vector2.ZERO
 
-@export var damage = 10.0
+@export var damage = 15.0
 @onready var collision = $CollisionShape2D
 @onready var disabletimer = $disablehitboxtimer
 

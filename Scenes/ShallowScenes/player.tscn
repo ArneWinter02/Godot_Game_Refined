@@ -17,7 +17,7 @@ script/source = "extends CharacterBody2D
 # UI Munitions vars
 @export var max_ammo = 10
 @export var ammo_used = 1
-var cur_ammo = max_ammo
+var cur_ammo = 10
 # UI Health vars
 @export var healthpoints = 60.0
 @export var healthcur = healthpoints
@@ -27,7 +27,6 @@ var dir
 
 
 signal shoot(_pos: Vector2, dir: Vector2) 
-signal reload()
 
 #Waffen Onready's
 @onready var Jagdgewehr = $Node2D
@@ -99,24 +98,10 @@ func update_healthbar(heal):
 
 
 # AMMO CALCULATION + UI
-func ammo_calc():
-	if not timer.is_stopped():
-		return
-	if Input.is_action_just_pressed(\"shoot\"):
-		cur_ammo -= ammo_used
-		if cur_ammo >= 0:
-			munitionLabl.text = str(cur_ammo)+ \"/\" + str(max_ammo)
-		elif cur_ammo<=0:
-			munitionLabl.text = str(0) + \"/\" + str(max_ammo)
-	elif Input.is_action_just_pressed(\"reload\") and cur_ammo<max_ammo:
-		ammo_update()
 
 func ammo_update():
-	if max_ammo<Global.max_muni:
-		max_ammo = Global.max_muni
-	else:
-		timer.start()
-		cur_ammo = max_ammo
+	timer.start()
+	cur_ammo = max_ammo
 
 # GENRAL PURPOSE FUNCTIONS
 func _ready() -> void:
@@ -124,25 +109,32 @@ func _ready() -> void:
 	M110.visible = false
 
 func _physics_process(_float):
-	if Input.is_action_just_pressed(\"shoot\"):
-		print(cur_ammo,\"/\",max_ammo,\"/\",Global.max_muni)
-	if Input.is_action_just_pressed(\"MenuButton\"):
-		pause_screen.visible = true
-		get_tree().paused = true
-	if cur_ammo >=0:
-		ammo_calc()
-	else:
-		ammo_update()
 	direction = Input.get_vector(\"left\", \"right\", \"up\", \"down\")
-	velocity = direction * speed
+	velocity = direction * speed 
 	animation()
 	move_and_slide()
 	reward_for_killing()
+	if Input.is_action_just_pressed(\"MenuButton\"):
+		pause_screen.visible = true
+		get_tree().paused = true
+	if not timer.is_stopped():
+		return
+	if Input.is_action_just_pressed(\"shoot\"):
+			cur_ammo -= ammo_used
+			if cur_ammo >= 0:
+				munitionLabl.text = str(cur_ammo)+ \"/\" + str(max_ammo)
+			elif cur_ammo<=0:
+				munitionLabl.text = str(0) + \"/\" + str(max_ammo)
+				ammo_update()
+	elif Input.is_action_just_pressed(\"reload\") and cur_ammo<max_ammo:
+			ammo_update()
+
+
 
 
 func _on_local_reload_timeout() -> void:
+	cur_ammo = max_ammo
 	munitionLabl.text = str(cur_ammo)+ \"/\" + str(max_ammo)
-
 
 func _on_pickuparea_area_entered(area: Area2D) -> void:
 	if area.is_in_group(\"loot\"):
@@ -198,20 +190,25 @@ func reward():
 
 func reward_character(reward):
 	match reward:
-		\"Crocs1\",\"Crocs2\":
-			Global.bonus_movespeed+=10
+		\"Crocs1\":
+			speed += 5
+		\"Crocs2\":
+			speed+= 5
 		\"M110Gewehr\":
 			Jagdgewehr.process_mode = 4
 			Jagdgewehr.visible = false
-			M110.process_mode = 0
+			M110.process_mode = 1
 			M110.visible = true
 		\"Herz1\",\"Herz2\":
 			healthpoints+=20
 		\"Hohlspitz1\",\"Hohlspitz2\":
 			Global.BulletDamage += 5
-		\"LargeMag1\",\"LargeMag2\":
-			Global.max_muni += 5
-			Global.max_muni += max_ammo
+		\"LargeMag1\":
+			Global.max_muni = 15
+			max_ammo += 5
+		\"LargeMag2\":
+			Global.max_muni = 20
+			max_ammo += 5
 		\"RedMag1\", \"Redmag2\":
 			Global.bulletHP += 1
 		\"TapedMag1\", \"TapedMag2\":
@@ -229,13 +226,12 @@ func reward_character(reward):
 
 
 func reward_for_killing():
-	var rewards_accum = 15
-	if Global.enemies == rewards_for_kills_ini:
-		rewards_for_kills_ini += 0 
-		reward()
-	elif Global.enemies == rewards_accum:
-		rewards_accum += rewards_accum
-		reward()
+	for num in Global.enemies:
+		if Global.enemies == rewards_for_kills_ini:
+			reward()
+			rewards_for_kills_ini += 20
+			print(rewards_for_kills_ini)
+
 
 func get_random_reward():
 	var dblist = []
@@ -244,7 +240,7 @@ func get_random_reward():
 			pass
 		elif i in rewards_options:
 			pass
-		elif RewardDataBase.REWARDS[i][\"type\"] == \"boots\":
+		elif RewardDataBase.REWARDS[i][\"type\"] == \"MAX\":
 			pass
 		elif RewardDataBase.REWARDS[i][\"prerequisite\"].size() > 0:
 			for n in RewardDataBase.REWARDS[i][\"prerequisite\"]:

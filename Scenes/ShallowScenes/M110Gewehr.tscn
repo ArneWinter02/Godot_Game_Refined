@@ -9,7 +9,7 @@ position = Vector2(643, 342)
 script = ExtResource("1_pk3t6")
 
 [node name="Marker2D" type="Marker2D" parent="."]
-position = Vector2(5, 0)
+position = Vector2(9, 0)
 gizmo_extents = 0.0
 
 [node name="Sprite2D" type="Sprite2D" parent="."]

@@ -30,7 +30,7 @@ const REWARDS = {
 "M110Gewehr": {
 		"icon": ICON_PATH + "M110Gewehr.png",
 		"displayname": "M110 Marksmanrifle",
-		"detail": "Ein verbessertes Gewehr mit einem höherem Kaliber und mehr Munition! +1 Durschschlagskraft, +50 Kugelgeschwindigkeit & +5 Schaden",
+		"detail": "Ein verbessertes Gewehr mit einem höherem Kaliber und mehr Munition! +5 Kugeln, +1 Durschschlagskraft, +50 Kugelgeschwindigkeit & +5 Schaden",
 		"level": "Entwicklung!",
 		"prerequisite": ["Hohlspitz2","LargeMag2","RedMag2"],
 		"type": "waffe",
@@ -39,14 +39,14 @@ const REWARDS = {
 	
 	# CONTAINER
 	"Herz1": {
-		"icon": ICON_PATH + "Herz.png",
+	"icon": ICON_PATH + "Herz.png",
 		"displayname": "Herz Kontainer",
 		"detail": "Ein weiteres Herz, erhöht das maximale Leben! +20 Leben",
 		"level": "Level: 1",
 		"prerequisite": [],
 		"type": "container",
 	},
-		"Herz2": {
+	"Herz2": {
 		"icon": ICON_PATH + "Herz.png",
 		"displayname": "Herz Kontainer",
 		"detail": "Ein weiteres Herz, erhöht das maximale Leben! +20 Leben",
@@ -58,9 +58,9 @@ const REWARDS = {
 	
 	
 	# UPGRADES
-		"Hohlspitz1": {
+	"Hohlspitz1": {
 		"icon": ICON_PATH + "Hohlspitzgeschoss.png",
-		"displayname": "Herz Kontainer",
+		"displayname": "Hohlspitzgeschoss",
 		"detail": "Ein verbessertes Geschoss! Wird beim Jagen verwendet! +5 Schaden",
 		"level": "Level: 1",
 		"prerequisite": [],
@@ -74,7 +74,7 @@ const REWARDS = {
 		"prerequisite": ["Hohlspitz1"],
 		"type": "upgrade",
 	},
-		"LargeMag1": {
+	"LargeMag1": {
 		"icon": ICON_PATH + "Large_Magazine.png.png",
 		"displayname": "Größeres Magazin",
 		"detail": "Ein größeres Magazin, erhöht die Anzahl der Kugeln! +5 Kugeln",
@@ -82,7 +82,7 @@ const REWARDS = {
 		"prerequisite": [],
 		"type": "upgrade",
 	},
-			"LargeMag2": {
+	"LargeMag2": {
 		"icon": ICON_PATH + "Large_Magazine.png.png",
 		"displayname": "Größeres Magazin",
 		"detail": "Ein größeres Magazin, erhöht die Anzahl der Kugeln! +5 Kugeln",
@@ -90,7 +90,7 @@ const REWARDS = {
 		"prerequisite": ["LargeMag1"],
 		"type": "upgrade",
 	},
-					"TapedMag1": {
+	"TapedMag1": {
 		"icon": ICON_PATH + "Magazine_Taped.png.png",
 		"displayname": "Geklebtes Magazin",
 		"detail": "Ein zusammen geklebtes Magazin, verringert die Nachladegeschwindigkeit! -0.25 Sekunden",
@@ -98,7 +98,7 @@ const REWARDS = {
 		"prerequisite": [],
 		"type": "upgrade",
 	},
-				"TapedMag2": {
+	"TapedMag2": {
 		"icon": ICON_PATH + "Magazine_Taped.png.png",
 		"displayname": "Größeres Magazin",
 		"detail": "Ein zusammen geklebtes Magazin, verringert die Nachladegeschwindigkeit! -0.25 Sekunden",
@@ -106,7 +106,7 @@ const REWARDS = {
 		"prerequisite": ["TapedMag1"],
 		"type": "upgrade",
 	},
-					"RedMag1": {
+	"RedMag1": {
 		"icon": ICON_PATH + "Magazine_rot_morePEN.png",
 		"displayname": "Panzerbrechende Kugeln",
 		"detail": "Panzerbrechende Kugeln, sie sorgen für mehr Durchschlagskraft! +1 Durchschlagskraft",
@@ -114,12 +114,20 @@ const REWARDS = {
 		"prerequisite": [],
 		"type": "upgrade",
 	},
-					"RedMag2": {
+	"RedMag2": {
 		"icon": ICON_PATH + "Magazine_rot_morePEN.png",
 		"displayname": "Panzerbrechende Kugeln",
 		"detail": "Panzerbrechende Kugeln, sie sorgen für mehr Durschschlagskraft! +1 Durchschlagskraft",
 		"level": "Level: 2",
 		"prerequisite": ["RedMag1"],
 		"type": "upgrade",
+	},
+	"MAX": {
+		"icon": ICON_PATH + "Herz.png",
+		"displayname": "MAXIMALE UPGRADES ERREICHT!",
+		"detail": "",
+		"level": "Level: MAX",
+		"prerequisite": ["RedMag1"],
+		"type": "MAX",
 	},
 }
