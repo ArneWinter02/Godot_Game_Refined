@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=3 uid="uid://c0unbanf4wa0g"]
+[gd_scene load_steps=35 format=3 uid="uid://c0unbanf4wa0g"]
 
 [ext_resource type="Texture2D" uid="uid://b4p8cdu3dsal0" path="res://Bilder/Tilemaps/Plague_doktor.png" id="1_cvnsp"]
 [ext_resource type="PackedScene" uid="uid://b32h5x6mjro2a" path="res://Scenes/ShallowScenes/Hurtbox.tscn" id="4_1nc73"]
@@ -9,6 +9,7 @@
 [ext_resource type="AudioStream" uid="uid://dh0h6bwm5bqy2" path="res://assets/SFX/HurtSound/man-death-scream.mp3" id="8_rc6nt"]
 [ext_resource type="PackedScene" uid="uid://dama8h2ffsnvm" path="res://Scenes/UserInterface/pause_screen.tscn" id="9_5rpka"]
 [ext_resource type="PackedScene" uid="uid://cn21lfo4rqsxy" path="res://Scenes/UserInterface/MenuScreenFade.tscn" id="9_rc6nt"]
+[ext_resource type="PackedScene" uid="uid://dawtlem3rqnx4" path="res://Scenes/ShallowScenes/M110Gewehr.tscn" id="10_5rpka"]
 
 [sub_resource type="GDScript" id="GDScript_vgqql"]
 script/source = "extends CharacterBody2D
@@ -16,26 +17,34 @@ script/source = "extends CharacterBody2D
 # UI Munitions vars
 @export var max_ammo = 10
 @export var ammo_used = 1
-var cur_ammo = max_ammo
+var cur_ammo = 10
 # UI Health vars
-@onready var healthpoints = 60.0
-@onready var healthcur = healthpoints
-
+@export var healthpoints = 60.0
+@export var healthcur = healthpoints
+@export var speed = 90
 var direction: Vector2 = Vector2(1,1)
-@export var speed: int = 100
 var dir
 
 
 signal shoot(_pos: Vector2, dir: Vector2) 
-signal reload()
 
+#Waffen Onready's
+@onready var Jagdgewehr = $Node2D
+@onready var M110 = $Node2D2/Sprite2D
 
+#
 @onready var pause_screen = $UI/Control/MarginContainer/VBoxContainer/pause_screen
 @onready var animated_sprite = $AnimatedSprite2D
+
+#UI related Variables
 @onready var timer = $\"Timer&Sounds/LocalReload\"
 @onready var lebensbalken = $UI/Leben/HealthBar
 @onready var munitionLabl = $UI/Munition/VBoxContainer/MunitionLabel
+
+#Hurtsound
 @onready var sound = $\"Timer&Sounds/HurtSnd\"
+
+#Death System
 @onready var deathsound = $\"Timer&Sounds/Deathsound\"
 @onready var MenuScreenFade = $MenuScreenFade
 @onready var deathtimer = $\"Timer&Sounds/Deathtimer\"
@@ -48,7 +57,10 @@ signal reload()
 @onready var RewardContainer = $UI/Reward/RewardContainer
 @onready var RewardSound = $UI/Reward/RewardSound
 @onready var RewardOptions = preload(\"res://Scenes/UserInterface/rewards.tscn\")
-@export var rewards_for_kills_ini = 3
+@export var rewards_for_kills_ini = 5
+var collected_rewards = []
+var rewards_options = []
+
 
 
 func animation():
@@ -62,7 +74,7 @@ func animation():
 		elif dir.x < 0:
 			animated_sprite.play(\"idle_left\")
 
-
+# DAMAGE CALCULATION + UI
 func _on_hurtbox_hurt(damage):
 	healthcur -= damage
 	print(healthcur)
@@ -85,47 +97,44 @@ func update_healthbar(heal):
 		lebensbalken.value = healthcur
 
 
-
-func ammo_calc():
-	if not timer.is_stopped():
-		return
-	if Input.is_action_just_pressed(\"shoot\"):
-		cur_ammo -= ammo_used
-		if cur_ammo >= 0:
-			munitionLabl.text = str(cur_ammo)+ \"/\" + str(max_ammo)
-		elif cur_ammo<=0:
-			munitionLabl.text = str(0) + \"/\" + str(max_ammo)
-	elif Input.is_action_just_pressed(\"reload\") and cur_ammo<max_ammo:
-		ammo_update()
-
+# AMMO CALCULATION + UI
 
 func ammo_update():
 	timer.start()
 	cur_ammo = max_ammo
 
-
+# GENRAL PURPOSE FUNCTIONS
 func _ready() -> void:
 	reward_for_killing()
-
+	M110.visible = false
 
 func _physics_process(_float):
-	if Input.is_action_just_pressed(\"MenuButton\"):
-		pause_screen.visible = true
-		get_tree().paused = true
-	if cur_ammo >=0:
-		ammo_calc()
-	else:
-		ammo_update()
 	direction = Input.get_vector(\"left\", \"right\", \"up\", \"down\")
-	velocity = direction * speed
+	velocity = direction * speed 
 	animation()
 	move_and_slide()
 	reward_for_killing()
+	if Input.is_action_just_pressed(\"MenuButton\"):
+		pause_screen.visible = true
+		get_tree().paused = true
+	if not timer.is_stopped():
+		return
+	if Input.is_action_just_pressed(\"shoot\"):
+			cur_ammo -= ammo_used
+			if cur_ammo >= 0:
+				munitionLabl.text = str(cur_ammo)+ \"/\" + str(max_ammo)
+			elif cur_ammo<=0:
+				munitionLabl.text = str(0) + \"/\" + str(max_ammo)
+				ammo_update()
+	elif Input.is_action_just_pressed(\"reload\") and cur_ammo<max_ammo:
+			ammo_update()
+
+
 
 
 func _on_local_reload_timeout() -> void:
+	cur_ammo = max_ammo
 	munitionLabl.text = str(cur_ammo)+ \"/\" + str(max_ammo)
-
 
 func _on_pickuparea_area_entered(area: Area2D) -> void:
 	if area.is_in_group(\"loot\"):
@@ -167,35 +176,86 @@ func _on_main_menu_pressed() -> void:
 func reward():
 	RewardSound.play()
 	var tween = RewardPanel.create_tween()
-	tween.tween_property(RewardPanel,\"position\", Vector2(525.0,100.0),0.2).set_trans(Tween.TRANS_QUINT).set_ease(Tween.EASE_IN)
+	tween.tween_property(RewardPanel,\"position\", Vector2(200.0,100.0),0.2).set_trans(Tween.TRANS_QUINT).set_ease(Tween.EASE_IN)
 	tween.play()
 	RewardPanel.visible = true
 	var options = 0
 	var optionsmax = 3
 	while options<optionsmax:
 		var option_choice = RewardOptions.instantiate()
+		option_choice.item = get_random_reward()
 		RewardContainer.add_child(option_choice)
 		options += 1
 	get_tree().paused = true
 
 func reward_character(reward):
+	match reward:
+		\"Crocs1\":
+			speed += 5
+		\"Crocs2\":
+			speed+= 5
+		\"M110Gewehr\":
+			Jagdgewehr.process_mode = 4
+			Jagdgewehr.visible = false
+			M110.process_mode = 1
+			M110.visible = true
+		\"Herz1\",\"Herz2\":
+			healthpoints+=20
+		\"Hohlspitz1\",\"Hohlspitz2\":
+			Global.BulletDamage += 5
+		\"LargeMag1\":
+			Global.max_muni = 15
+			max_ammo += 5
+		\"LargeMag2\":
+			Global.max_muni = 20
+			max_ammo += 5
+		\"RedMag1\", \"Redmag2\":
+			Global.bulletHP += 1
+		\"TapedMag1\", \"TapedMag2\":
+			Global.reload_speed = 0.25
+			timer.wait_time -= Global.reload_speed 
 	Global.enemies += 1
 	var reward_children = RewardContainer.get_children()
 	for i in reward_children:
 		i.queue_free()
+	rewards_options.clear()
+	collected_rewards.append(reward)
 	RewardPanel.visible = false
 	RewardPanel.position = Vector2(1600,100)
 	get_tree().paused = false
 
 
 func reward_for_killing():
-	var rewards_accum = 30
-	if Global.enemies == rewards_for_kills_ini:
-		rewards_for_kills_ini += rewards_accum 
-		reward()
-	elif Global.enemies == rewards_accum:
-		rewards_accum += rewards_accum
-		reward()
+	for num in Global.enemies:
+		if Global.enemies == rewards_for_kills_ini:
+			reward()
+			rewards_for_kills_ini += 20
+			print(rewards_for_kills_ini)
+
+
+func get_random_reward():
+	var dblist = []
+	for i in RewardDataBase.REWARDS:
+		if i in collected_rewards:
+			pass
+		elif i in rewards_options:
+			pass
+		elif RewardDataBase.REWARDS[i][\"type\"] == \"MAX\":
+			pass
+		elif RewardDataBase.REWARDS[i][\"prerequisite\"].size() > 0:
+			for n in RewardDataBase.REWARDS[i][\"prerequisite\"]:
+				if not n in collected_rewards:
+					pass
+				else:
+					dblist.append(i)
+		else:
+			dblist.append(i)
+	if dblist.size() > 0:
+		var randomReward = dblist.pick_random()
+		rewards_options.append(randomReward)
+		return randomReward
+	else:
+		return null
 "
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ik7gq"]
@@ -465,6 +525,11 @@ stream = SubResource("AudioStreamRandomizer_vq6bo")
 pitch_scale = 1.5
 bus = &"SFX"
 
+[node name="Node2D2" parent="." instance=ExtResource("10_5rpka")]
+process_mode = 4
+visible = false
+position = Vector2(1, -0.5)
+
 [connection signal="hurt" from="Hurtbox" to="." method="_on_hurtbox_hurt"]
 [connection signal="timeout" from="Node2D/reload" to="." method="_on_reload_timeout"]
 [connection signal="area_entered" from="pickuparea" to="." method="_on_pickuparea_area_entered"]
@@ -479,3 +544,4 @@ bus = &"SFX"
 [editable path="UI"]
 [editable path="UI/Control/MarginContainer/VBoxContainer/pause_screen"]
 [editable path="MenuScreenFade"]
+[editable path="Node2D2"]

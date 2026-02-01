@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://b5kakulprxmw2"]
+[gd_scene load_steps=10 format=3 uid="uid://b5kakulprxmw2"]
 
 [ext_resource type="Script" uid="uid://b0842jhy6mslb" path="res://Scenes/UserInterface/ui.gd" id="1_6ehn7"]
 [ext_resource type="Texture2D" uid="uid://b4btvl7csapwo" path="res://Bilder/UserInterface/Magazine_UI.png" id="1_l84sa"]
@@ -13,6 +13,14 @@ outline_size = 2
 outline_color = Color(0, 0, 0, 1)
 
 [sub_resource type="LabelSettings" id="LabelSettings_6ehn7"]
+font_size = 30
+outline_size = 5
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_tpagg"]
+font_size = 30
+outline_size = 5
+outline_color = Color(0, 0, 0, 1)
 
 [node name="UI" type="CanvasLayer"]
 script = ExtResource("1_6ehn7")
@@ -114,16 +122,16 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = 1600.0
 offset_top = 100.0
-offset_right = 720.0
-offset_bottom = -220.0
+offset_right = 1120.0
+offset_bottom = -70.0
 grow_horizontal = 2
 grow_vertical = 2
 
 [node name="RewardText" type="Label" parent="Reward"]
 layout_mode = 0
-offset_right = 400.0
+offset_right = 800.0
 offset_bottom = 75.0
-text = "Upgrades!"
+text = "REWARDS!"
 label_settings = SubResource("LabelSettings_6ehn7")
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -139,3 +147,26 @@ offset_bottom = 175.0
 stream = ExtResource("5_443gc")
 volume_db = -10.0
 bus = &"SFX"
+
+[node name="Panel" type="Panel" parent="."]
+offset_left = 393.0
+offset_top = 55.0
+offset_right = 871.0
+offset_bottom = 248.0
+
+[node name="Label" type="Label" parent="Panel"]
+layout_mode = 0
+offset_right = 478.0
+offset_bottom = 192.0
+text = "Überlebe für 2 Minuten!
+Folge dann dem Weg!"
+label_settings = SubResource("LabelSettings_tpagg")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="InfoTimeout" type="Timer" parent="Panel"]
+wait_time = 5.0
+one_shot = true
+autostart = true
+
+[connection signal="timeout" from="Panel/InfoTimeout" to="." method="_on_info_timeout_timeout"]

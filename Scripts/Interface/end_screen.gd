@@ -1,10 +1,13 @@
 extends Node2D
 var checker = 0
+@onready var label = $Control/Ratskilled
 
 func _ready() -> void:
 	$Control/MenuScreenFade.show()
 	$Control/MenuScreenFade/AnimationTree.play("fade_out")
 
+func _physics_process(delta: float) -> void:
+	label.text = "Rats killed " + str(Global.enemies)
 
 func _on_retry_pressed() -> void:
 	get_tree().paused = false

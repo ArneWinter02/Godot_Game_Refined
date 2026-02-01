@@ -1,19 +1,17 @@
 extends Area2D
 signal remove_from_array(object) 
 
-
-var speed: int = 400
-var level: int
 var hp = 1.0
-var knockback_amount = 100
-var attack_size = 1.0
 var target = Vector2.ZERO
 var angle = Vector2.ZERO
 
-
-@export var damage = 10.0
+@export var damage = 15.0
 @onready var collision = $CollisionShape2D
 @onready var disabletimer = $disablehitboxtimer
+
+func _ready() -> void:
+	hp += Global.bulletHP
+	damage += Global.BulletDamage
 
 func tempdisable():
 	collision.call_deferred("set","disabled",true)
