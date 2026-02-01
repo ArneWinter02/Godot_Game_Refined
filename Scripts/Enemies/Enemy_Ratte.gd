@@ -6,7 +6,6 @@ extends CharacterBody2D
 @onready var player = get_tree().get_first_node_in_group("player") #In der Node verankerte Gruppe für den Spieler
 @onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D #in der Szene verankerte 2D animation
 @onready var sound_hit = $rat_hit
-
 var death_anim = preload("res://Scenes/ShallowScenes/deathanimation.tscn")
 
 signal remove_from_array(object) 
@@ -20,24 +19,32 @@ func _physics_process(_delta: float):
 		animated_sprite_2d.flip_h = direction.x < 0
 
 func death():
-	Global.enemies += 1
+	Global.enemies_killed += 1
+	enemy_calc()
 	emit_signal("remove_from_array",self)
 	var enemy_death = death_anim.instantiate()
 	enemy_death.scale = animated_sprite_2d.scale
 	enemy_death.global_position = global_position
 	get_parent().call_deferred("add_child",enemy_death)
-	for num in Global.enemies:
-		var heartspawn = heart.instantiate()
-		if Global.enemies == dropchance:
-			print(dropchance)
-			dropchance += 12
-			Global.enemies += 1
-			heartspawn.global_position = global_position
-			get_parent().call_deferred("add_child",heartspawn)
+
 func _on_hurtbox_hurt(damage):
+	heart_spawn()
 	healthpoints -= damage
 	if healthpoints <= 0:
 		death()
 		queue_free()
 	else:
 		sound_hit.play()
+
+func heart_spawn():
+	var heartspawn = heart.instantiate()
+	if Global.enemies == dropchance:
+		dropchance += 12
+		heartspawn.global_position = global_position
+		get_parent().call_deferred("add_child",heartspawn)
+	else:
+		return
+
+func enemy_calc():
+	Global.enemies += 1
+	print(Global.enemies)

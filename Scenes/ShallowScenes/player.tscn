@@ -27,12 +27,17 @@ var dir
 
 
 signal shoot(_pos: Vector2, dir: Vector2) 
+# Reload Timers
+@onready var M110_reload_sound = $Node2D2/ReloadSound
+@onready var Jagdgewehr_reload_sound = $Node2D/ReloadSound
+
+
 
 #Waffen Onready's
 @onready var Jagdgewehr = $Node2D
-@onready var M110 = $Node2D2/Sprite2D
+@onready var M110 = $Node2D2
 
-#
+# Pause Screen node
 @onready var pause_screen = $UI/Control/MarginContainer/VBoxContainer/pause_screen
 @onready var animated_sprite = $AnimatedSprite2D
 
@@ -40,6 +45,7 @@ signal shoot(_pos: Vector2, dir: Vector2)
 @onready var timer = $\"Timer&Sounds/LocalReload\"
 @onready var lebensbalken = $UI/Leben/HealthBar
 @onready var munitionLabl = $UI/Munition/VBoxContainer/MunitionLabel
+@onready var lebensbalkenzahl = $UI/Leben/Label
 
 #Hurtsound
 @onready var sound = $\"Timer&Sounds/HurtSnd\"
@@ -86,6 +92,7 @@ func _on_hurtbox_hurt(damage):
 func set_healthbar(set_value, set_max_value):
 	lebensbalken.value = set_value
 	lebensbalken.max_value = set_max_value
+	lebensbalkenzahl.text = str(healthcur)
 
 
 func update_healthbar(heal):
@@ -105,21 +112,23 @@ func ammo_update():
 
 # GENRAL PURPOSE FUNCTIONS
 func _ready() -> void:
-	reward_for_killing()
 	M110.visible = false
+	M110.process_mode = Node.PROCESS_MODE_DISABLED
+	set_healthbar(healthcur, healthpoints)
 
 func _physics_process(_float):
 	direction = Input.get_vector(\"left\", \"right\", \"up\", \"down\")
 	velocity = direction * speed 
 	animation()
 	move_and_slide()
-	reward_for_killing()
 	if Input.is_action_just_pressed(\"MenuButton\"):
 		pause_screen.visible = true
 		get_tree().paused = true
 	if not timer.is_stopped():
 		return
 	if Input.is_action_just_pressed(\"shoot\"):
+			reward_for_killing()
+			print(rewards_for_kills_ini)
 			cur_ammo -= ammo_used
 			if cur_ammo >= 0:
 				munitionLabl.text = str(cur_ammo)+ \"/\" + str(max_ammo)
@@ -193,12 +202,14 @@ func reward_character(reward):
 		\"Crocs1\":
 			speed += 5
 		\"Crocs2\":
-			speed+= 5
+			speed += 5
 		\"M110Gewehr\":
-			Jagdgewehr.process_mode = 4
+			Jagdgewehr.process_mode = Node.AUTO_TRANSLATE_MODE_DISABLED
 			Jagdgewehr.visible = false
-			M110.process_mode = 1
+			M110.process_mode = Node.PROCESS_MODE_INHERIT
 			M110.visible = true
+			max_ammo += 5
+			Global.max_muni = 25
 		\"Herz1\",\"Herz2\":
 			healthpoints+=20
 		\"Hohlspitz1\",\"Hohlspitz2\":
@@ -226,11 +237,9 @@ func reward_character(reward):
 
 
 func reward_for_killing():
-	for num in Global.enemies:
-		if Global.enemies == rewards_for_kills_ini:
-			reward()
-			rewards_for_kills_ini += 20
-			print(rewards_for_kills_ini)
+	if Global.enemies == rewards_for_kills_ini:
+		reward()
+		rewards_for_kills_ini += 15
 
 
 func get_random_reward():
@@ -526,8 +535,6 @@ pitch_scale = 1.5
 bus = &"SFX"
 
 [node name="Node2D2" parent="." instance=ExtResource("10_5rpka")]
-process_mode = 4
-visible = false
 position = Vector2(1, -0.5)
 
 [connection signal="hurt" from="Hurtbox" to="." method="_on_hurtbox_hurt"]

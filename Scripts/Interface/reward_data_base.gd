@@ -32,10 +32,10 @@ const REWARDS = {
 		"displayname": "M110 Marksmanrifle",
 		"detail": "Ein verbessertes Gewehr mit einem höherem Kaliber und mehr Munition! +5 Kugeln, +1 Durschschlagskraft, +50 Kugelgeschwindigkeit & +5 Schaden",
 		"level": "Entwicklung!",
-		"prerequisite": ["Hohlspitz2","LargeMag2","RedMag2"],
+		"prerequisite": ["Hohlspitz2", "LargeMag2", "RedMag2"],
 		"type": "waffe",
 	},
-	
+	#"Hohlspitz2","LargeMag2","RedMag2"
 	
 	# CONTAINER
 	"Herz1": {

@@ -26,7 +26,7 @@ func _ready():
 
 
 func _input(event: InputEvent) -> void:
-	if event.is_action("shoot"):
+	if event.is_action("checker"):
 		if mouse_over:
 			
 			emit_signal("selected_reward",item)

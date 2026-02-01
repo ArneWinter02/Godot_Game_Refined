@@ -2,15 +2,24 @@ extends Node2D
 var curMusicChecker: String
 var entered = false
 var checker = 0
-
+@onready var Transistor = $Map_Transition/CollisionShape2D
+@onready var level_beat_timer = $Map_Transition/LevelBeatTimer
 
 
 func _ready() -> void:
+	Global.enemies = 0
+	Global.BulletDamage = 0
+	Global.bulletHP = 0
+	Global.BulletSpeed = 0
+	Global.max_muni = 0
+	Global.reload_speed = 0
+	Global.bonus_movespeed = 0
 	$MenuScreenFade.show()
 	$MenuScreenFade/AnimationTree.play("fade_out")
 	Global.musicChecker = "Level"
-	
 func _process(_delta: float) -> void:
+	if Input.is_action_just_pressed("checker"):
+			print(level_beat_timer.wait_time)
 	if curMusicChecker != Global.musicChecker:
 		curMusicChecker = Global.musicChecker
 		update_music_scene()
@@ -34,3 +43,7 @@ func _on_map_transition_body_entered(body: Node2D) -> void:
 		$MenuScreenFade.show()
 		$MenuScreenFade/ScreenFadeTimer.start()
 		$MenuScreenFade/AnimationTree.play("fade_in")
+
+
+func _on_level_beat_timer_timeout() -> void:
+	Transistor.call_deferred("set","disalbed", false)
