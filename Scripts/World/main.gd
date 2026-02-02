@@ -3,6 +3,7 @@ var bullet_scene = preload("res://Scenes/ShallowScenes/bullet.tscn")
 var entered = false
 var checker = 0
 var curMusicChecker: String
+@onready var Transistor = $Map_Transition/CollisionShape2D
 
 func _ready() -> void:
 	$MenuScreenFade.show()
@@ -32,3 +33,7 @@ func _on_map_transition_body_entered(_body: Node2D) -> void:
 		$MenuScreenFade.show()
 		$MenuScreenFade/ScreenFadeTimer.start()
 		$MenuScreenFade/AnimationTree.play("fade_in")
+
+
+func _on_level_beat_timer_timeout() -> void:
+	Transistor.call_deferred("set","disalbed", false)

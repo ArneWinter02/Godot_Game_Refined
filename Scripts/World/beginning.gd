@@ -3,7 +3,8 @@ var curMusicChecker: String
 var entered = false
 var checker = 0
 @onready var Transistor = $Map_Transition/CollisionShape2D
-@onready var level_beat_timer = $Map_Transition/LevelBeatTimer
+@onready var level_beat_timer: Timer = $Map_Transition/LevelBeatTimer
+
 
 
 func _ready() -> void:
@@ -14,12 +15,12 @@ func _ready() -> void:
 	Global.max_muni = 0
 	Global.reload_speed = 0
 	Global.bonus_movespeed = 0
+	Global.enemies_killed = 0
+	Global.dropchance = 12
 	$MenuScreenFade.show()
 	$MenuScreenFade/AnimationTree.play("fade_out")
 	Global.musicChecker = "Level"
 func _process(_delta: float) -> void:
-	if Input.is_action_just_pressed("checker"):
-			print(level_beat_timer.wait_time)
 	if curMusicChecker != Global.musicChecker:
 		curMusicChecker = Global.musicChecker
 		update_music_scene()

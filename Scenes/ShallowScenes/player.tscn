@@ -100,9 +100,10 @@ func update_healthbar(heal):
 	print(healthcur)
 	if healthcur >= 60.0:
 		healthcur = healthpoints
+		lebensbalkenzahl.text = str(healthcur)
 	if healthcur <= 60:
 		lebensbalken.value = healthcur
-
+		lebensbalkenzahl.text = str(healthcur)
 
 # AMMO CALCULATION + UI
 
@@ -212,6 +213,7 @@ func reward_character(reward):
 			Global.max_muni = 25
 		\"Herz1\",\"Herz2\":
 			healthpoints+=20
+			set_healthbar(healthcur, healthpoints)
 		\"Hohlspitz1\",\"Hohlspitz2\":
 			Global.BulletDamage += 5
 		\"LargeMag1\":
@@ -431,7 +433,7 @@ streams_count = 2
 stream_0/stream = ExtResource("5_rj054")
 stream_1/stream = ExtResource("6_3vsyq")
 
-[node name="Player" type="CharacterBody2D" groups=["player"]]
+[node name="player" type="CharacterBody2D" groups=["player"]]
 z_index = 1
 position = Vector2(532, 316)
 scale = Vector2(2, 2)

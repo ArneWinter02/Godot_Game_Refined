@@ -13,3 +13,4 @@ var musicChecker: String
 @export var reload_speed = 0
 @export var bonus_movespeed = 0
 var enemies_killed = 0
+var dropchance = 12

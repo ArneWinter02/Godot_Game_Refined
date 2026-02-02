@@ -1,3 +1,15 @@
-[gd_scene format=3 uid="uid://cl1f0gtxryshe"]
+[gd_scene load_steps=2 format=3 uid="uid://cl1f0gtxryshe"]
+
+[ext_resource type="PackedScene" uid="uid://c0unbanf4wa0g" path="res://Scenes/ShallowScenes/player.tscn" id="1_i0p0k"]
 
 [node name="Next_Level" type="Node2D"]
+
+[node name="Player" parent="." instance=ExtResource("1_i0p0k")]
+
+[editable path="Player"]
+[editable path="Player/Hurtbox"]
+[editable path="Player/Node2D"]
+[editable path="Player/UI"]
+[editable path="Player/UI/Control/MarginContainer/VBoxContainer/pause_screen"]
+[editable path="Player/MenuScreenFade"]
+[editable path="Player/Node2D2"]

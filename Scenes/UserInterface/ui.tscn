@@ -1,6 +1,6 @@
 [gd_scene load_steps=10 format=3 uid="uid://b5kakulprxmw2"]
 
-[ext_resource type="Script" uid="uid://b0842jhy6mslb" path="res://Scenes/UserInterface/ui.gd" id="1_6ehn7"]
+[ext_resource type="Script" uid="uid://b0842jhy6mslb" path="res://Scripts/Interface/ui.gd" id="1_6ehn7"]
 [ext_resource type="Texture2D" uid="uid://b4btvl7csapwo" path="res://Bilder/UserInterface/Magazine_UI.png" id="1_l84sa"]
 [ext_resource type="AudioStream" uid="uid://wqklmpd1avc6" path="res://assets/SFX/level-up-191997.mp3" id="5_443gc"]
 
