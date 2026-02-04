@@ -38,13 +38,6 @@ func _on_screen_fade_timer_timeout() -> void:
 
 
 func _on_map_transition_body_entered(body: Node2D) -> void:
-	checker = 1
-	entered = true
-	if entered == true:
 		$MenuScreenFade.show()
 		$MenuScreenFade/ScreenFadeTimer.start()
 		$MenuScreenFade/AnimationTree.play("fade_in")
-
-
-func _on_level_beat_timer_timeout() -> void:
-	Transistor.call_deferred("set","disalbed", false)

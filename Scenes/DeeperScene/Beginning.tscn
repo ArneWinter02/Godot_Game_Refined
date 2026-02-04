@@ -322,11 +322,9 @@ script = ExtResource("1_opek6")
 
 [node name="Map_Transition" parent="." instance=ExtResource("16_6vlrc")]
 position = Vector2(751, -57)
-metadata/_edit_lock_ = true
 
 [node name="CollisionShape2D" parent="Map_Transition" index="0"]
 position = Vector2(0, 0.25)
-disabled = true
 
 [node name="MenuScreenFade" parent="." instance=ExtResource("4_7i0s5")]
 visible = false

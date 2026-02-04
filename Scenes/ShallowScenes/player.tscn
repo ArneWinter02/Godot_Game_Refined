@@ -17,7 +17,7 @@ script/source = "extends CharacterBody2D
 # UI Munitions vars
 @export var max_ammo = 10
 @export var ammo_used = 1
-var cur_ammo = 10
+@export var cur_ammo = 10
 # UI Health vars
 @export var healthpoints = 60.0
 @export var healthcur = healthpoints
@@ -64,8 +64,8 @@ signal shoot(_pos: Vector2, dir: Vector2)
 @onready var RewardSound = $UI/Reward/RewardSound
 @onready var RewardOptions = preload(\"res://Scenes/UserInterface/rewards.tscn\")
 @export var rewards_for_kills_ini = 5
-var collected_rewards = []
-var rewards_options = []
+@export var collected_rewards = []
+@export var rewards_options = []
 
 
 
@@ -83,7 +83,7 @@ func animation():
 # DAMAGE CALCULATION + UI
 func _on_hurtbox_hurt(damage):
 	healthcur -= damage
-	print(healthcur)
+	
 	set_healthbar(healthcur, healthpoints)
 	sound.play()
 	if healthcur <= 0.0:
@@ -92,12 +92,11 @@ func _on_hurtbox_hurt(damage):
 func set_healthbar(set_value, set_max_value):
 	lebensbalken.value = set_value
 	lebensbalken.max_value = set_max_value
-	lebensbalkenzahl.text = str(healthcur)
+	lebensbalkenzahl.text = str(set_value)
 
 
 func update_healthbar(heal):
 	healthcur += heal
-	print(healthcur)
 	if healthcur >= 60.0:
 		healthcur = healthpoints
 		lebensbalkenzahl.text = str(healthcur)
@@ -128,8 +127,8 @@ func _physics_process(_float):
 	if not timer.is_stopped():
 		return
 	if Input.is_action_just_pressed(\"shoot\"):
-			reward_for_killing()
 			print(rewards_for_kills_ini)
+			reward_for_killing()
 			cur_ammo -= ammo_used
 			if cur_ammo >= 0:
 				munitionLabl.text = str(cur_ammo)+ \"/\" + str(max_ammo)
@@ -201,9 +200,11 @@ func reward():
 func reward_character(reward):
 	match reward:
 		\"Crocs1\":
-			speed += 5
+			speed += 10
 		\"Crocs2\":
-			speed += 5
+			speed += 10
+		\"Crocs3\":
+			speed += 10
 		\"M110Gewehr\":
 			Jagdgewehr.process_mode = Node.AUTO_TRANSLATE_MODE_DISABLED
 			Jagdgewehr.visible = false
@@ -219,9 +220,11 @@ func reward_character(reward):
 		\"LargeMag1\":
 			Global.max_muni = 15
 			max_ammo += 5
+			ammo_update()
 		\"LargeMag2\":
 			Global.max_muni = 20
 			max_ammo += 5
+			ammo_update()
 		\"RedMag1\", \"Redmag2\":
 			Global.bulletHP += 1
 		\"TapedMag1\", \"TapedMag2\":
@@ -259,8 +262,6 @@ func get_random_reward():
 					pass
 				else:
 					dblist.append(i)
-		else:
-			dblist.append(i)
 	if dblist.size() > 0:
 		var randomReward = dblist.pick_random()
 		rewards_options.append(randomReward)

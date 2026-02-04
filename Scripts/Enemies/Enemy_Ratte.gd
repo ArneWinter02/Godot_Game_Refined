@@ -27,9 +27,9 @@ func death():
 	get_parent().call_deferred("add_child",enemy_death)
 
 func _on_hurtbox_hurt(damage):
-	heart_spawn()
 	healthpoints -= damage
 	if healthpoints <= 0:
+		heart_spawn()
 		death()
 		queue_free()
 	else:

@@ -23,7 +23,14 @@ const REWARDS = {
 		"prerequisite": ["Crocs1"],
 		"type": "boots"
 	},
-	
+			"Crocs3": {
+		"icon": ICON_PATH + "Crocs.png",
+		"displayname": "Crocs im Sportmodus",
+		"detail": "Crocs die im Sportmodus sind, gewähren mehr Lauftempo! +10 Lauftempo",
+		"level": "Level: 3",
+		"prerequisite": ["Crocs2"],
+		"type": "boots"
+	},
 	
 	
 	# WAFFEN
@@ -32,7 +39,7 @@ const REWARDS = {
 		"displayname": "M110 Marksmanrifle",
 		"detail": "Ein verbessertes Gewehr mit einem höherem Kaliber und mehr Munition! +5 Kugeln, +1 Durschschlagskraft, +50 Kugelgeschwindigkeit & +5 Schaden",
 		"level": "Entwicklung!",
-		"prerequisite": ["Hohlspitz2", "LargeMag2", "RedMag2"],
+		"prerequisite": ["Hohlspitz2","LargeMag2","RedMag2"],
 		"type": "waffe",
 	},
 	#"Hohlspitz2","LargeMag2","RedMag2"
