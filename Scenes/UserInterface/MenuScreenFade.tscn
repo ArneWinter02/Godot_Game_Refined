@@ -73,4 +73,3 @@ libraries = {
 
 [node name="ScreenFadeTimer" type="Timer" parent="."]
 one_shot = true
-autostart = true

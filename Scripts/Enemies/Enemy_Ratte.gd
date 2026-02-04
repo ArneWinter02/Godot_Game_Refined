@@ -38,7 +38,7 @@ func _on_hurtbox_hurt(damage):
 func heart_spawn():
 	var heartspawn = heart.instantiate()
 	if Global.enemies == Global.dropchance:
-		Global.dropchance += 12
+		Global.dropchance += 25
 		heartspawn.global_position = global_position
 		get_parent().call_deferred("add_child",heartspawn)
 	else:

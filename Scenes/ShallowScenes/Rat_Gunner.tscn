@@ -81,9 +81,8 @@ top_level = true
 script = ExtResource("1_kwbg6")
 
 [node name="RayCast2D" type="RayCast2D" parent="."]
-target_position = Vector2(0, 100)
 collision_mask = 2
-collide_with_areas = true
+hit_from_inside = true
 
 [node name="debug" type="Label" parent="."]
 visible = false
@@ -121,7 +120,9 @@ script = ExtResource("7_c5hea")
 bullet_node = ExtResource("8_rl835")
 
 [node name="Shoot_Timer" type="Timer" parent="Finite_State_Machine/Shooting"]
-wait_time = 5.0
+wait_time = 1.5
+
+[node name="Reload_Timer" type="Timer" parent="Finite_State_Machine/Shooting"]
 
 [node name="Follow" type="Node2D" parent="Finite_State_Machine"]
 script = ExtResource("8_p4d6a")
@@ -135,6 +136,7 @@ HurtBoxType = 1
 position = Vector2(0, -1)
 
 [connection signal="timeout" from="Finite_State_Machine/Shooting/Shoot_Timer" to="Finite_State_Machine/Shooting" method="_on_shoot_timer_timeout"]
+[connection signal="timeout" from="Finite_State_Machine/Shooting/Reload_Timer" to="Finite_State_Machine/Shooting" method="_on_reload_timer_timeout"]
 [connection signal="hurt" from="Hurtbox" to="." method="_on_hurtbox_hurt"]
 
 [editable path="Hurtbox"]

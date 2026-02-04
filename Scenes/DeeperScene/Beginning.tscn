@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=4 uid="uid://wf2x8rrsaw1l"]
+[gd_scene load_steps=38 format=4 uid="uid://wf2x8rrsaw1l"]
 
 [ext_resource type="PackedScene" uid="uid://c0unbanf4wa0g" path="res://Scenes/ShallowScenes/player.tscn" id="1_oa8wt"]
 [ext_resource type="Script" uid="uid://co6tdsoxw5urp" path="res://Scripts/World/beginning.gd" id="1_opek6"]
@@ -8,6 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://bu2ypscxchp6m" path="res://Bilder/Tilemaps/Strand_Tileset.png" id="7_i3tni"]
 [ext_resource type="Texture2D" uid="uid://bm1sng5qu6xdr" path="res://Bilder/Tilemaps/Strandgras_TILE.png" id="8_c4rbq"]
 [ext_resource type="Texture2D" uid="uid://d177gdhawyvf2" path="res://Bilder/Tilemaps/Standardgras_Tile.png" id="9_4apck"]
+[ext_resource type="PackedScene" uid="uid://5lw6uvsgwm3i" path="res://Scenes/ShallowScenes/Rat_Gunner.tscn" id="9_nyyt7"]
 [ext_resource type="Texture2D" uid="uid://bevemjid4ptc8" path="res://Bilder/Tilemaps/Übergrangs_Tile.png" id="10_4apck"]
 [ext_resource type="PackedScene" uid="uid://ogwns5datvxm" path="res://Scenes/ShallowScenes/deko_collision.tscn" id="11_2yjik"]
 [ext_resource type="PackedScene" uid="uid://c5ko3ee7hlkrm" path="res://Scenes/ShallowScenes/Spawner.tscn" id="11_k88m2"]
@@ -71,6 +72,24 @@ time_end = 120
 enemy = ExtResource("14_nusmd")
 enemy_num = 3
 enemy_spawn_delay = 4
+metadata/_custom_type_script = "uid://bum422lrbyv46"
+
+[sub_resource type="Resource" id="Resource_bbgql"]
+script = ExtResource("12_alt6u")
+time_start = 5
+time_end = 90
+enemy = ExtResource("9_nyyt7")
+enemy_num = 1
+enemy_spawn_delay = 10
+metadata/_custom_type_script = "uid://bum422lrbyv46"
+
+[sub_resource type="Resource" id="Resource_0rncs"]
+script = ExtResource("12_alt6u")
+time_start = 90
+time_end = 120
+enemy = ExtResource("9_nyyt7")
+enemy_num = 2
+enemy_spawn_delay = 10
 metadata/_custom_type_script = "uid://bum422lrbyv46"
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_i3tni"]
@@ -324,7 +343,7 @@ script = ExtResource("1_opek6")
 position = Vector2(751, -57)
 
 [node name="CollisionShape2D" parent="Map_Transition" index="0"]
-position = Vector2(0, 0.25)
+position = Vector2(0, -1)
 
 [node name="MenuScreenFade" parent="." instance=ExtResource("4_7i0s5")]
 visible = false
@@ -346,7 +365,7 @@ polygon = PackedVector2Array(2, 0, 15, 156, 45, 259, 87, 428, 142, 491, 254, 526
 [node name="EnemySpawner" parent="." instance=ExtResource("11_k88m2")]
 z_index = 1
 position = Vector2(1, 0)
-spawns = Array[ExtResource("12_alt6u")]([SubResource("Resource_2yjik"), SubResource("Resource_nusmd"), SubResource("Resource_6vlrc"), SubResource("Resource_w5bcp"), SubResource("Resource_gn6w8"), SubResource("Resource_nyyt7")])
+spawns = Array[ExtResource("12_alt6u")]([SubResource("Resource_2yjik"), SubResource("Resource_nusmd"), SubResource("Resource_6vlrc"), SubResource("Resource_w5bcp"), SubResource("Resource_gn6w8"), SubResource("Resource_nyyt7"), SubResource("Resource_bbgql"), SubResource("Resource_0rncs")])
 metadata/_edit_lock_ = true
 
 [node name="Tilemaps" type="Node2D" parent="."]
@@ -517,7 +536,6 @@ limit_right = 767
 z_index = 1
 
 [connection signal="body_entered" from="Map_Transition" to="." method="_on_map_transition_body_entered"]
-[connection signal="timeout" from="Map_Transition/LevelBeatTimer" to="." method="_on_level_beat_timer_timeout"]
 [connection signal="timeout" from="MenuScreenFade/ScreenFadeTimer" to="." method="_on_screen_fade_timer_timeout"]
 
 [editable path="Map_Transition"]

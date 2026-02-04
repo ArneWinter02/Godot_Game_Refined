@@ -1,15 +1,152 @@
-[gd_scene load_steps=2 format=3 uid="uid://cl1f0gtxryshe"]
+[gd_scene load_steps=11 format=3 uid="uid://cl1f0gtxryshe"]
 
-[ext_resource type="PackedScene" uid="uid://c0unbanf4wa0g" path="res://Scenes/ShallowScenes/player.tscn" id="1_i0p0k"]
+[ext_resource type="PackedScene" uid="uid://cn21lfo4rqsxy" path="res://Scenes/UserInterface/MenuScreenFade.tscn" id="1_hecro"]
+[ext_resource type="Script" uid="uid://ks34je5u5mag" path="res://Scenes/DeeperScene/next_level.gd" id="1_i56vl"]
+[ext_resource type="Texture2D" uid="uid://bbwryyyd0vusv" path="res://Bilder/Tilemaps/MenuHintergrund.png" id="2_i56vl"]
+[ext_resource type="Texture2D" uid="uid://cuadvu6ndsw4x" path="res://Bilder/Tilemaps/User_Interface.png" id="3_cv8ej"]
 
-[node name="Next_Level" type="Node2D"]
+[sub_resource type="LabelSettings" id="LabelSettings_0h83b"]
+font_size = 64
 
-[node name="Player" parent="." instance=ExtResource("1_i0p0k")]
+[sub_resource type="AtlasTexture" id="AtlasTexture_05ur0"]
+atlas = ExtResource("3_cv8ej")
+region = Rect2(68, 226.03278, 98, 23.967224)
 
-[editable path="Player"]
-[editable path="Player/Hurtbox"]
-[editable path="Player/Node2D"]
-[editable path="Player/UI"]
-[editable path="Player/UI/Control/MarginContainer/VBoxContainer/pause_screen"]
-[editable path="Player/MenuScreenFade"]
-[editable path="Player/Node2D2"]
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_n0b8d"]
+texture = ExtResource("3_cv8ej")
+region_rect = Rect2(66, 226, 102, 24)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_m1jnh"]
+texture = ExtResource("3_cv8ej")
+region_rect = Rect2(54, 167, 102, 24)
+
+[sub_resource type="LabelSettings" id="LabelSettings_04via"]
+font_size = 18
+outline_size = 5
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_2br1k"]
+font_size = 18
+outline_size = 5
+outline_color = Color(0, 0, 0, 1)
+
+[node name="Winning Screen" type="Node2D"]
+script = ExtResource("1_i56vl")
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="MenuScreenFade" parent="Control" instance=ExtResource("1_hecro")]
+visible = false
+top_level = false
+layout_mode = 1
+offset_left = -920.0
+offset_top = -977.0
+offset_right = 928.0
+offset_bottom = 1233.0
+
+[node name="MarginContainer" type="MarginContainer" parent="Control"]
+layout_mode = 0
+offset_right = 1280.0
+offset_bottom = 720.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/MarginContainer"]
+layout_mode = 2
+
+[node name="HSeparator" type="HSeparator" parent="Control/MarginContainer/VBoxContainer"]
+modulate = Color(1, 1, 1, 0)
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Control/MarginContainer/VBoxContainer"]
+light_mask = 128
+visibility_layer = 128
+custom_minimum_size = Vector2(400, 200)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+text = "Victory"
+label_settings = SubResource("LabelSettings_0h83b")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TextureRect" type="NinePatchRect" parent="Control/MarginContainer/VBoxContainer/Label"]
+show_behind_parent = true
+clip_contents = true
+custom_minimum_size = Vector2(0, 200)
+layout_mode = 0
+offset_left = -440.0
+offset_top = -104.0
+offset_right = 840.0
+offset_bottom = 616.0
+texture = ExtResource("2_i56vl")
+
+[node name="TextureRect2" type="TextureRect" parent="Control/MarginContainer/VBoxContainer/Label"]
+show_behind_parent = true
+custom_minimum_size = Vector2(400, 200)
+layout_mode = 0
+offset_right = 400.0
+offset_bottom = 200.0
+texture = SubResource("AtlasTexture_05ur0")
+
+[node name="HSeparator3" type="HSeparator" parent="Control/MarginContainer/VBoxContainer"]
+modulate = Color(1, 1, 1, 0)
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+
+[node name="Retry" type="Button" parent="Control/MarginContainer/VBoxContainer"]
+visible = false
+custom_minimum_size = Vector2(150, 50)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_styles/normal = SubResource("StyleBoxTexture_n0b8d")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_m1jnh")
+theme_override_styles/hover = SubResource("StyleBoxTexture_m1jnh")
+
+[node name="Label" type="Label" parent="Control/MarginContainer/VBoxContainer/Retry"]
+layout_mode = 0
+offset_right = 150.0
+offset_bottom = 50.5
+text = "Retry"
+label_settings = SubResource("LabelSettings_04via")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HSeparator2" type="HSeparator" parent="Control/MarginContainer/VBoxContainer"]
+modulate = Color(1, 1, 1, 0)
+custom_minimum_size = Vector2(0, 10)
+layout_mode = 2
+
+[node name="Main Menu2" type="Button" parent="Control/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(150, 50)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_styles/normal = SubResource("StyleBoxTexture_n0b8d")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_m1jnh")
+theme_override_styles/hover = SubResource("StyleBoxTexture_m1jnh")
+
+[node name="Label" type="Label" parent="Control/MarginContainer/VBoxContainer/Main Menu2"]
+layout_mode = 0
+offset_right = 150.0
+offset_bottom = 50.5
+text = "Main Menu"
+label_settings = SubResource("LabelSettings_04via")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Ratskilled" type="Label" parent="Control"]
+layout_mode = 0
+offset_left = 526.0
+offset_top = 315.0
+offset_right = 754.0
+offset_bottom = 401.0
+label_settings = SubResource("LabelSettings_2br1k")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="pressed" from="Control/MarginContainer/VBoxContainer/Main Menu2" to="." method="_on_main_menu_2_pressed"]

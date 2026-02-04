@@ -17,6 +17,7 @@ script = ExtResource("1_qkp54")
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("1_lwl4h")
+volume_db = -15.0
 pitch_scale = 2.5
 autoplay = true
 bus = &"SFX"

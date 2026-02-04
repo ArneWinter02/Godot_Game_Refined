@@ -211,6 +211,7 @@ func reward_character(reward):
 			M110.process_mode = Node.PROCESS_MODE_INHERIT
 			M110.visible = true
 			max_ammo += 5
+			Global.BulletDamage += 5
 			Global.max_muni = 25
 		\"Herz1\",\"Herz2\":
 			healthpoints+=20
@@ -262,6 +263,8 @@ func get_random_reward():
 					pass
 				else:
 					dblist.append(i)
+		else:
+			dblist.append(i)
 	if dblist.size() > 0:
 		var randomReward = dblist.pick_random()
 		rewards_options.append(randomReward)
@@ -438,6 +441,7 @@ stream_1/stream = ExtResource("6_3vsyq")
 z_index = 1
 position = Vector2(532, 316)
 scale = Vector2(2, 2)
+disable_mode = 2
 collision_layer = 49
 collision_mask = 49
 platform_floor_layers = 4294901809

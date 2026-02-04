@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://dgmflsg086pby" path="res://Scenes/ShallowScenes/map_transistor.gd" id="1_s7dux"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ihkde"]
-size = Vector2(24.5, 44.5)
+size = Vector2(24.5, 42)
 
 [node name="Map_Transition" type="Area2D" groups=["transition"]]
 collision_layer = 16

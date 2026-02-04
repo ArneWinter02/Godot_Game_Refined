@@ -21,21 +21,19 @@ func _ready():
 func _process(_delta):
 	direction = (player.position - global_position).normalized()
 	ray_cast.target_position = direction * 100
-
 func _physics_process(_delta):
 	velocity = direction * speed
 	move_and_slide()
-	if ray_cast.target_position.x and ray_cast.is_colliding():
-		animation_tree.play("Idle")
-		animation_tree.flip_h = direction.x < 0
-	else:
+	if direction.x:
 		animation_tree.play("Right")
 		animation_tree.flip_h = direction.x < 0
-
+	else:
+		animation_tree.play("Idle")
+		animation_tree.flip_h = direction.x < 0
 func death():
 	Global.enemies_killed += 1
 	enemy_calc()
-	emit_signal("remove_from_array",self)
+	#emit_signal("remove_from_array",self)
 	var enemy_death = death_anim.instantiate()
 	enemy_death.scale = animation_tree.scale
 	enemy_death.global_position = global_position
@@ -55,7 +53,7 @@ func _on_hurtbox_hurt(damage):
 func heart_spawn():
 	var heartspawn = heart.instantiate()
 	if Global.enemies == Global.dropchance:
-		Global.dropchance += 12
+		Global.dropchance += 25
 		heartspawn.global_position = global_position
 		get_parent().call_deferred("add_child",heartspawn)
 	else:

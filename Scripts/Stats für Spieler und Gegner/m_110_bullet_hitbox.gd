@@ -4,18 +4,20 @@ signal remove_from_array(object)
 
 @export var speed: int = 450
 var level: int
-@export var hp = 4.0
+@export var hp = 2.0
 var knockback_amount = 100
 @export var attack_size = 1.0
 var target = Vector2.ZERO
 var angle = Vector2.ZERO
 
 
-@export var damage = 30.0
+@export var damage = 15.0
 @onready var collision = $CollisionShape2D
 @onready var disabletimer = $disablehitboxtimer
 
 func tempdisable():
+	hp += Global.bulletHP
+	damage += Global.BulletDamage
 	collision.call_deferred("set","disabled",true)
 	disabletimer.start()
 
