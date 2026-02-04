@@ -3,6 +3,7 @@ var bullet_scene = preload("res://Scenes/ShallowScenes/bullet.tscn")
 var entered = false
 var checker = 0
 var curMusicChecker: String
+@onready var Transistor = $Map_Transition/CollisionShape2D
 
 func _ready() -> void:
 	$MenuScreenFade.show()
@@ -20,7 +21,12 @@ func update_music_scene():
 	BackroundMusic.audio_stream_player["parameters/switch_to_clip"] = curMusic
 
 
-func _on_map_transition_body_entered(body: Node2D) -> void:
+func _on_screen_fade_timer_timeout() -> void:
+	if checker == 1:
+		get_tree().change_scene_to_file("res://Scenes/DeeperScene/next_level.tscn")
+
+
+func _on_map_transition_body_entered(_body: Node2D) -> void:
 	checker = 1
 	entered = true
 	if entered == true:
@@ -29,6 +35,5 @@ func _on_map_transition_body_entered(body: Node2D) -> void:
 		$MenuScreenFade/AnimationTree.play("fade_in")
 
 
-func _on_screen_fade_timer_timeout() -> void:
-	if checker == 1:
-		get_tree().change_scene_to_file("res://Scenes/DeeperScene/next_level.tscn")
+func _on_level_beat_timer_timeout() -> void:
+	Transistor.call_deferred("set","disalbed", false)

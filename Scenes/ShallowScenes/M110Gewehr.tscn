@@ -29,5 +29,5 @@ one_shot = true
 [node name="ReloadSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("3_8ss1o")
 volume_db = -10.0
-pitch_scale = 1.5
+pitch_scale = 1.38
 bus = &"SFX"

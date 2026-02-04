@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://c4nb64mhvrx0i" path="res://Scripts/Stats für Spieler und Gegner/hurtbox.gd" id="1_lx2kf"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_lx2kf"]
+size = Vector2(11.5, 15)
 
 [node name="Hurtbox" type="Area2D"]
 collision_layer = 0

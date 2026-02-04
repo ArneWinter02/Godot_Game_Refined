@@ -23,7 +23,14 @@ const REWARDS = {
 		"prerequisite": ["Crocs1"],
 		"type": "boots"
 	},
-	
+			"Crocs3": {
+		"icon": ICON_PATH + "Crocs.png",
+		"displayname": "Crocs im Sportmodus",
+		"detail": "Crocs die im Sportmodus sind, gewähren mehr Lauftempo! +10 Lauftempo",
+		"level": "Level: 3",
+		"prerequisite": ["Crocs2"],
+		"type": "boots"
+	},
 	
 	
 	# WAFFEN
@@ -35,7 +42,7 @@ const REWARDS = {
 		"prerequisite": ["Hohlspitz2","LargeMag2","RedMag2"],
 		"type": "waffe",
 	},
-	
+	#"Hohlspitz2","LargeMag2","RedMag2"
 	
 	# CONTAINER
 	"Herz1": {

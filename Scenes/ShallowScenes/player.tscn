@@ -17,7 +17,7 @@ script/source = "extends CharacterBody2D
 # UI Munitions vars
 @export var max_ammo = 10
 @export var ammo_used = 1
-var cur_ammo = 10
+@export var cur_ammo = 10
 # UI Health vars
 @export var healthpoints = 60.0
 @export var healthcur = healthpoints
@@ -27,12 +27,17 @@ var dir
 
 
 signal shoot(_pos: Vector2, dir: Vector2) 
+# Reload Timers
+@onready var M110_reload_sound = $Node2D2/ReloadSound
+@onready var Jagdgewehr_reload_sound = $Node2D/ReloadSound
+
+
 
 #Waffen Onready's
 @onready var Jagdgewehr = $Node2D
-@onready var M110 = $Node2D2/Sprite2D
+@onready var M110 = $Node2D2
 
-#
+# Pause Screen node
 @onready var pause_screen = $UI/Control/MarginContainer/VBoxContainer/pause_screen
 @onready var animated_sprite = $AnimatedSprite2D
 
@@ -40,6 +45,7 @@ signal shoot(_pos: Vector2, dir: Vector2)
 @onready var timer = $\"Timer&Sounds/LocalReload\"
 @onready var lebensbalken = $UI/Leben/HealthBar
 @onready var munitionLabl = $UI/Munition/VBoxContainer/MunitionLabel
+@onready var lebensbalkenzahl = $UI/Leben/Label
 
 #Hurtsound
 @onready var sound = $\"Timer&Sounds/HurtSnd\"
@@ -58,8 +64,8 @@ signal shoot(_pos: Vector2, dir: Vector2)
 @onready var RewardSound = $UI/Reward/RewardSound
 @onready var RewardOptions = preload(\"res://Scenes/UserInterface/rewards.tscn\")
 @export var rewards_for_kills_ini = 5
-var collected_rewards = []
-var rewards_options = []
+@export var collected_rewards = []
+@export var rewards_options = []
 
 
 
@@ -77,7 +83,7 @@ func animation():
 # DAMAGE CALCULATION + UI
 func _on_hurtbox_hurt(damage):
 	healthcur -= damage
-	print(healthcur)
+	
 	set_healthbar(healthcur, healthpoints)
 	sound.play()
 	if healthcur <= 0.0:
@@ -86,16 +92,17 @@ func _on_hurtbox_hurt(damage):
 func set_healthbar(set_value, set_max_value):
 	lebensbalken.value = set_value
 	lebensbalken.max_value = set_max_value
+	lebensbalkenzahl.text = str(set_value)
 
 
 func update_healthbar(heal):
 	healthcur += heal
-	print(healthcur)
 	if healthcur >= 60.0:
 		healthcur = healthpoints
+		lebensbalkenzahl.text = str(healthcur)
 	if healthcur <= 60:
 		lebensbalken.value = healthcur
-
+		lebensbalkenzahl.text = str(healthcur)
 
 # AMMO CALCULATION + UI
 
@@ -105,21 +112,23 @@ func ammo_update():
 
 # GENRAL PURPOSE FUNCTIONS
 func _ready() -> void:
-	reward_for_killing()
 	M110.visible = false
+	M110.process_mode = Node.PROCESS_MODE_DISABLED
+	set_healthbar(healthcur, healthpoints)
 
 func _physics_process(_float):
 	direction = Input.get_vector(\"left\", \"right\", \"up\", \"down\")
 	velocity = direction * speed 
 	animation()
 	move_and_slide()
-	reward_for_killing()
 	if Input.is_action_just_pressed(\"MenuButton\"):
 		pause_screen.visible = true
 		get_tree().paused = true
 	if not timer.is_stopped():
 		return
 	if Input.is_action_just_pressed(\"shoot\"):
+			print(rewards_for_kills_ini)
+			reward_for_killing()
 			cur_ammo -= ammo_used
 			if cur_ammo >= 0:
 				munitionLabl.text = str(cur_ammo)+ \"/\" + str(max_ammo)
@@ -191,24 +200,31 @@ func reward():
 func reward_character(reward):
 	match reward:
 		\"Crocs1\":
-			speed += 5
+			speed += 10
 		\"Crocs2\":
-			speed+= 5
+			speed += 10
+		\"Crocs3\":
+			speed += 10
 		\"M110Gewehr\":
-			Jagdgewehr.process_mode = 4
+			Jagdgewehr.process_mode = Node.AUTO_TRANSLATE_MODE_DISABLED
 			Jagdgewehr.visible = false
-			M110.process_mode = 1
+			M110.process_mode = Node.PROCESS_MODE_INHERIT
 			M110.visible = true
+			max_ammo += 5
+			Global.max_muni = 25
 		\"Herz1\",\"Herz2\":
 			healthpoints+=20
+			set_healthbar(healthcur, healthpoints)
 		\"Hohlspitz1\",\"Hohlspitz2\":
 			Global.BulletDamage += 5
 		\"LargeMag1\":
 			Global.max_muni = 15
 			max_ammo += 5
+			ammo_update()
 		\"LargeMag2\":
 			Global.max_muni = 20
 			max_ammo += 5
+			ammo_update()
 		\"RedMag1\", \"Redmag2\":
 			Global.bulletHP += 1
 		\"TapedMag1\", \"TapedMag2\":
@@ -226,11 +242,9 @@ func reward_character(reward):
 
 
 func reward_for_killing():
-	for num in Global.enemies:
-		if Global.enemies == rewards_for_kills_ini:
-			reward()
-			rewards_for_kills_ini += 20
-			print(rewards_for_kills_ini)
+	if Global.enemies == rewards_for_kills_ini:
+		reward()
+		rewards_for_kills_ini += 15
 
 
 func get_random_reward():
@@ -248,8 +262,6 @@ func get_random_reward():
 					pass
 				else:
 					dblist.append(i)
-		else:
-			dblist.append(i)
 	if dblist.size() > 0:
 		var randomReward = dblist.pick_random()
 		rewards_options.append(randomReward)
@@ -422,7 +434,7 @@ streams_count = 2
 stream_0/stream = ExtResource("5_rj054")
 stream_1/stream = ExtResource("6_3vsyq")
 
-[node name="Player" type="CharacterBody2D" groups=["player"]]
+[node name="player" type="CharacterBody2D" groups=["player"]]
 z_index = 1
 position = Vector2(532, 316)
 scale = Vector2(2, 2)
@@ -526,8 +538,6 @@ pitch_scale = 1.5
 bus = &"SFX"
 
 [node name="Node2D2" parent="." instance=ExtResource("10_5rpka")]
-process_mode = 4
-visible = false
 position = Vector2(1, -0.5)
 
 [connection signal="hurt" from="Hurtbox" to="." method="_on_hurtbox_hurt"]
