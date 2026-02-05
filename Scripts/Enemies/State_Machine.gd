@@ -1,6 +1,5 @@
 extends Node2D
 class_name State
-
 @onready var player = owner.get_tree().get_first_node_in_group("player")
 @onready var ray_cast = owner.find_child("RayCast2D")
 @onready var debug = owner.find_child("debug")

@@ -10,8 +10,9 @@ var death_anim = preload("res://Scenes/ShallowScenes/deathanimation.tscn")
 
 
 
+
 var direction = Vector2.RIGHT
-@export var speed = 25
+@export var speed = 50
 @export var healthpoints = 15
 
 
@@ -19,11 +20,14 @@ func _ready():
 	set_physics_process(false)
 
 func _process(_delta):
-	direction = (player.position - global_position).normalized()
 	ray_cast.target_position = direction * 100
+	direction = (player.position - global_position).normalized()
+	if not ray_cast.is_colliding():
+		velocity = direction * speed
+		move_and_slide()
+	else:
+		return
 func _physics_process(_delta):
-	velocity = direction * speed
-	move_and_slide()
 	if direction.x:
 		animation_tree.play("Right")
 		animation_tree.flip_h = direction.x < 0

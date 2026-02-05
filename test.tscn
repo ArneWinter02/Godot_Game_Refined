@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://bd8a0dns77hav"]
+
+[ext_resource type="PackedScene" uid="uid://c0unbanf4wa0g" path="res://Scenes/ShallowScenes/player.tscn" id="1_8uh7m"]
+[ext_resource type="PackedScene" uid="uid://5lw6uvsgwm3i" path="res://Scenes/ShallowScenes/Rat_Gunner.tscn" id="2_6uqi0"]
+
+[node name="Node2D" type="Node2D"]
+
+[node name="player" parent="." instance=ExtResource("1_8uh7m")]
+
+[node name="Rat_gunner" parent="." instance=ExtResource("2_6uqi0")]
+position = Vector2(664, 327)
