@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://eo7qyg1tvyyk" path="res://Scripts/Stats für Spieler und Gegner/rat_gunner.gd" id="1_kwbg6"]
 [ext_resource type="AudioStream" uid="uid://bxqh6enh2cpit" path="res://assets/SFX/Squeak_1.mp3" id="2_2kj8t"]
-[ext_resource type="AudioStream" uid="uid://0xuuq1lqfxl8" path="res://assets/SFX/Squeak_2.mp3" id="3_2pwpe"]
+[ext_resource type="AudioStream" uid="uid://0xuuq1lqfxl8" path="res://assets/SFX/HurtSound/Squeak_2.mp3" id="3_2pwpe"]
 [ext_resource type="Texture2D" uid="uid://kdxi8xn7rx10" path="res://Bilder/Tilemaps/Fatrat-1.png.png" id="4_rl835"]
 [ext_resource type="PackedScene" uid="uid://b32h5x6mjro2a" path="res://Scenes/ShallowScenes/Hurtbox.tscn" id="5_2pwpe"]
 [ext_resource type="Script" uid="uid://cfcppl3o6msyl" path="res://Scripts/Enemies/finite_state_machine.gd" id="5_kwbg6"]

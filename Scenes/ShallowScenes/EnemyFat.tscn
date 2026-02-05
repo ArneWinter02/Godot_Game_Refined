@@ -6,7 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://b32h5x6mjro2a" path="res://Scenes/ShallowScenes/Hurtbox.tscn" id="4_hbvmb"]
 [ext_resource type="PackedScene" uid="uid://xfbnk5g2f1pp" path="res://Scenes/ShallowScenes/hitbox.tscn" id="5_exvws"]
 [ext_resource type="AudioStream" uid="uid://bxqh6enh2cpit" path="res://assets/SFX/Squeak_1.mp3" id="6_4u8mt"]
-[ext_resource type="AudioStream" uid="uid://0xuuq1lqfxl8" path="res://assets/SFX/Squeak_2.mp3" id="7_wkuhx"]
+[ext_resource type="AudioStream" uid="uid://0xuuq1lqfxl8" path="res://assets/SFX/HurtSound/Squeak_2.mp3" id="7_wkuhx"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_u7cdh"]
 size = Vector2(8, 6)
