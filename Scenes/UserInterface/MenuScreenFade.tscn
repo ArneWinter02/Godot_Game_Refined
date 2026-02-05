@@ -53,6 +53,7 @@ _data = {
 }
 
 [node name="MenuScreenFade" type="ColorRect"]
+process_mode = 3
 top_level = true
 anchors_preset = 15
 anchor_right = 1.0
@@ -72,4 +73,3 @@ libraries = {
 
 [node name="ScreenFadeTimer" type="Timer" parent="."]
 one_shot = true
-autostart = true

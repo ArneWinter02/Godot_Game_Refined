@@ -1,7 +1,7 @@
 [gd_scene load_steps=13 format=3 uid="uid://c3bqr43kg446f"]
 
-[ext_resource type="Script" uid="uid://di3c0irg4ggh4" path="res://Scripts/heart.gd" id="1_aua5x"]
-[ext_resource type="Texture2D" uid="uid://c5ndpkc8lma3g" path="res://Bilder/Items/Herzen_pickup.png" id="2_4o77q"]
+[ext_resource type="Script" uid="uid://di3c0irg4ggh4" path="res://Scripts/World/heart.gd" id="1_aua5x"]
+[ext_resource type="Texture2D" uid="uid://c5ndpkc8lma3g" path="res://Bilder/UserInterface/Herzen_pickup.png" id="2_4o77q"]
 [ext_resource type="AudioStream" uid="uid://bdqh0fmhq0t2a" path="res://assets/SFX/health-pickup.mp3" id="2_pxhl0"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_pxhl0"]
@@ -77,7 +77,7 @@ animations = [{
 }]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_aua5x"]
-radius = 12.165525
+radius = 5.0990195
 
 [node name="Heart" type="Area2D" groups=["loot"]]
 collision_layer = 8
@@ -86,17 +86,17 @@ script = ExtResource("1_aua5x")
 
 [node name="pickup" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("2_pxhl0")
-volume_db = -30.0
-pitch_scale = 3.0
+volume_db = -10.0
+pitch_scale = 2.0
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 scale = Vector2(0.5, 0.5)
 sprite_frames = SubResource("SpriteFrames_m6w4j")
 animation = &"Herz"
+autoplay = "Herz"
 frame_progress = 0.42753103
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(1, -1)
 shape = SubResource("CircleShape2D_aua5x")
 
 [connection signal="finished" from="pickup" to="." method="_on_pickup_finished"]

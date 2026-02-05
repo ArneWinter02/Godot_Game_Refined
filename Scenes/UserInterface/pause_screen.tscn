@@ -1,0 +1,121 @@
+[gd_scene load_steps=10 format=3 uid="uid://dama8h2ffsnvm"]
+
+[ext_resource type="Script" uid="uid://bhsb483qpnqsh" path="res://Scripts/Interface/pause_screen.gd" id="1_o30hj"]
+[ext_resource type="Texture2D" uid="uid://cuadvu6ndsw4x" path="res://Bilder/Tilemaps/User_Interface.png" id="2_bcgjs"]
+[ext_resource type="PackedScene" uid="uid://cn21lfo4rqsxy" path="res://Scenes/UserInterface/MenuScreenFade.tscn" id="3_3ss8b"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_3ss8b"]
+texture = ExtResource("2_bcgjs")
+region_rect = Rect2(66, 226, 102, 24)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_tli7m"]
+texture = ExtResource("2_bcgjs")
+region_rect = Rect2(54, 167, 102, 24)
+
+[sub_resource type="LabelSettings" id="LabelSettings_xxtdg"]
+font_size = 18
+outline_size = 5
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_0g6am"]
+texture = ExtResource("2_bcgjs")
+region_rect = Rect2(66, 226, 102, 24)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ocm8m"]
+texture = ExtResource("2_bcgjs")
+region_rect = Rect2(54, 167, 102, 24)
+
+[sub_resource type="LabelSettings" id="LabelSettings_etglo"]
+font_size = 18
+outline_size = 5
+outline_color = Color(0, 0, 0, 1)
+
+[node name="PauseScreen" type="Control"]
+process_mode = 3
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_o30hj")
+
+[node name="Control" type="Control" parent="."]
+anchors_preset = 0
+offset_right = 1280.0
+offset_bottom = 720.0
+
+[node name="Panel" type="Panel" parent="Control"]
+self_modulate = Color(0, 0, 0, 0.3647059)
+custom_minimum_size = Vector2(150, 300)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -75.0
+offset_top = -150.0
+offset_right = 125.0
+offset_bottom = 150.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MenuContainer" type="VBoxContainer" parent="Control/Panel"]
+layout_mode = 0
+offset_right = 200.0
+offset_bottom = 300.0
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/separation = 8
+
+[node name="HSeparator" type="HSeparator" parent="Control/Panel/MenuContainer"]
+modulate = Color(1, 1, 1, 0)
+custom_minimum_size = Vector2(0, 75)
+layout_mode = 2
+
+[node name="Resume" type="Button" parent="Control/Panel/MenuContainer"]
+custom_minimum_size = Vector2(150, 50)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_styles/normal = SubResource("StyleBoxTexture_3ss8b")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_tli7m")
+theme_override_styles/hover = SubResource("StyleBoxTexture_tli7m")
+
+[node name="Label" type="Label" parent="Control/Panel/MenuContainer/Resume"]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 0
+offset_right = 150.0
+offset_bottom = 50.5
+text = "RESUME"
+label_settings = SubResource("LabelSettings_xxtdg")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Main Menu" type="Button" parent="Control/Panel/MenuContainer"]
+custom_minimum_size = Vector2(150, 50)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+theme_override_styles/normal = SubResource("StyleBoxTexture_0g6am")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_ocm8m")
+theme_override_styles/hover = SubResource("StyleBoxTexture_ocm8m")
+
+[node name="Label" type="Label" parent="Control/Panel/MenuContainer/Main Menu"]
+layout_mode = 0
+offset_right = 150.0
+offset_bottom = 50.5
+text = "Main Menu"
+label_settings = SubResource("LabelSettings_etglo")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="MenuScreenFade" parent="." instance=ExtResource("3_3ss8b")]
+visible = false
+layout_mode = 1
+offset_left = -397.0
+offset_top = -348.0
+offset_right = 326.0
+offset_bottom = 367.0
+
+[connection signal="mouse_entered" from="Control/Panel/MenuContainer/Resume" to="." method="_on_resume_mouse_entered"]
+[connection signal="mouse_exited" from="Control/Panel/MenuContainer/Resume" to="." method="_on_resume_mouse_exited"]
+[connection signal="mouse_entered" from="Control/Panel/MenuContainer/Main Menu" to="." method="_on_main_menu_mouse_entered"]
+[connection signal="mouse_exited" from="Control/Panel/MenuContainer/Main Menu" to="." method="_on_main_menu_mouse_exited"]

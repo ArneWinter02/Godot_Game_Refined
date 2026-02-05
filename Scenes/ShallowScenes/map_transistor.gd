@@ -1,11 +1,13 @@
 extends Area2D
 
+@onready var colli_tran = $CollisionShape2D
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	pass # Replace with function body.
+	colli_tran.disabled = true
 
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
+
+
+func _on_level_beat_timer_timeout() -> void:
+	colli_tran.disabled = false

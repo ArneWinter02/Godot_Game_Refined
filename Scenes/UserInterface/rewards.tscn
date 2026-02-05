@@ -1,0 +1,83 @@
+[gd_scene load_steps=7 format=3 uid="uid://blcksfp73dxkg"]
+
+[ext_resource type="Texture2D" uid="uid://cvimjncxp1n28" path="res://Bilder/Items/Magazine.png" id="1_cyfpv"]
+[ext_resource type="Script" uid="uid://ceve1qqq8ahvp" path="res://Scripts/Interface/rewards.gd" id="1_wye1m"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wye1m"]
+atlas = ExtResource("1_cyfpv")
+region = Rect2(0, 32, 12, 23)
+
+[sub_resource type="LabelSettings" id="LabelSettings_d563b"]
+font_size = 30
+outline_size = 5
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_cyfpv"]
+font_size = 20
+outline_size = 5
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_wye1m"]
+font_size = 25
+outline_size = 5
+outline_color = Color(0, 0, 0, 1)
+
+[node name="RewardOption" type="ColorRect"]
+custom_minimum_size = Vector2(780, 100)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -100.0
+offset_right = -600.0
+offset_bottom = -570.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.49747366, 0.49747366, 0.49747366, 1)
+script = ExtResource("1_wye1m")
+
+[node name="ItemBackround" type="ColorRect" parent="."]
+layout_mode = 0
+offset_left = 2.0
+offset_top = 2.0
+offset_right = 96.0
+offset_bottom = 100.0
+
+[node name="ItemDisplay" type="TextureRect" parent="ItemBackround"]
+layout_mode = 0
+offset_left = 3.0
+offset_top = 3.0
+offset_right = 91.0
+offset_bottom = 94.0
+texture = SubResource("AtlasTexture_wye1m")
+
+[node name="ItemName" type="Label" parent="."]
+layout_mode = 0
+offset_left = 100.0
+offset_right = 779.0
+offset_bottom = 42.0
+text = "Name"
+label_settings = SubResource("LabelSettings_d563b")
+autowrap_mode = 3
+
+[node name="ItemDescrip" type="Label" parent="."]
+layout_mode = 0
+offset_left = 100.0
+offset_top = 38.0
+offset_right = 780.0
+offset_bottom = 150.0
+text = "Beschreibung"
+label_settings = SubResource("LabelSettings_cyfpv")
+autowrap_mode = 3
+
+[node name="ItemLevel" type="Label" parent="."]
+layout_mode = 0
+offset_left = 598.0
+offset_right = 754.0
+offset_bottom = 46.0
+label_settings = SubResource("LabelSettings_wye1m")
+autowrap_mode = 3
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]

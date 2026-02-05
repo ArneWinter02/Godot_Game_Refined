@@ -1,0 +1,44 @@
+[gd_scene load_steps=6 format=3 uid="uid://dulb2ou1rpd7f"]
+
+[ext_resource type="Script" uid="uid://gbibplmf1loa" path="res://Scripts/Stats für Spieler und Gegner/m_110_bullet.gd" id="1_25kvo"]
+[ext_resource type="AudioStream" uid="uid://dcadauns2godx" path="res://assets/SFX/ar15-rifle-shot-from-50-yards-away-98831.mp3" id="2_25kvo"]
+[ext_resource type="PackedScene" uid="uid://dnhgvhlxck826" path="res://Scenes/ShallowScenes/M110_Bullet_Hitbox.tscn" id="3_25kvo"]
+[ext_resource type="Texture2D" uid="uid://di0e4xnpjlske" path="res://Bilder/Tilemaps/kugel.png" id="4_u6exr"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ywruo"]
+size = Vector2(4, 2.5)
+
+[node name="M110bullet" type="Node2D" groups=["attack"]]
+top_level = true
+light_mask = 4
+visibility_layer = 4
+position = Vector2(0, 1)
+script = ExtResource("1_25kvo")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 4.0
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_25kvo")
+volume_db = -20.0
+pitch_scale = 4.0
+autoplay = true
+bus = &"SFX"
+
+[node name="Node2D" parent="." instance=ExtResource("3_25kvo")]
+speed = 450
+hp = 4.0
+attack_size = 1.0
+
+[node name="CollisionShape2D" parent="Node2D" index="0"]
+position = Vector2(0, -0.75)
+shape = SubResource("RectangleShape2D_ywruo")
+
+[node name="Kugel" type="Sprite2D" parent="Node2D"]
+position = Vector2(5.5, 3.5)
+scale = Vector2(0.75, 0.75)
+texture = ExtResource("4_u6exr")
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+
+[editable path="Node2D"]

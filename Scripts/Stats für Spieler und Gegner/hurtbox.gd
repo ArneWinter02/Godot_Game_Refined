@@ -5,6 +5,7 @@ extends Area2D
 
 @onready var collision = $CollisionShape2D
 @onready var disalbetimer = $DisableTimer
+@onready var hurtbox = $"."
 
 signal hurt(damage, angle, knockback)
 
@@ -15,7 +16,7 @@ func _on_area_entered(area: Area2D):
 		if not area.get("damage")==null:
 			match HurtBoxType:
 				0:
-					collision.call_deferred("set","disalbed", true)
+					hurtbox.monitorable = false
 					disalbetimer.start()
 				1:
 					if hit_once_array.has(area) == false:
@@ -40,4 +41,4 @@ func remove_from_list(object):
 		hit_once_array.erase(object)
 
 func _on_disable_timer_timeout():
-	collision.call_deferred("set","disalbed", false)
+	hurtbox.monitorable = true

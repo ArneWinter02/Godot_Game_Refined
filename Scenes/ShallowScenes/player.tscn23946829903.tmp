@@ -1,0 +1,419 @@
+[gd_scene load_steps=35 format=3 uid="uid://c0unbanf4wa0g"]
+
+[ext_resource type="Texture2D" uid="uid://b4p8cdu3dsal0" path="res://Bilder/Bilder/Plague_doktor.png" id="1_cvnsp"]
+[ext_resource type="PackedScene" uid="uid://b32h5x6mjro2a" path="res://Scenes/ShallowScenes/Hurtbox.tscn" id="4_1nc73"]
+[ext_resource type="PackedScene" uid="uid://b5kakulprxmw2" path="res://Scenes/UserInterface/ui.tscn" id="4_2ttdi"]
+[ext_resource type="PackedScene" uid="uid://o7qc7uhlib0y" path="res://Scenes/ShallowScenes/Waffe.tscn" id="4_vgqql"]
+[ext_resource type="AudioStream" uid="uid://dsqjtlkh6ejr4" path="res://assets/SFX/HurtSound/grunt2.mp3" id="5_rj054"]
+[ext_resource type="AudioStream" uid="uid://bk4ml6inpjh48" path="res://assets/SFX/HurtSound/male_hurt.mp3" id="6_3vsyq"]
+[ext_resource type="AudioStream" uid="uid://dh0h6bwm5bqy2" path="res://assets/SFX/HurtSound/man-death-scream.mp3" id="8_rc6nt"]
+[ext_resource type="PackedScene" uid="uid://dama8h2ffsnvm" path="res://Scenes/UserInterface/pause_screen.tscn" id="9_5rpka"]
+[ext_resource type="PackedScene" uid="uid://cn21lfo4rqsxy" path="res://Scenes/UserInterface/MenuScreenFade.tscn" id="9_rc6nt"]
+[ext_resource type="PackedScene" uid="uid://ci1bu4rieieq4" path="res://Scenes/UserInterface/User-Helper.tscn" id="10_5rpka"]
+
+[sub_resource type="GDScript" id="GDScript_vgqql"]
+script/source = "extends CharacterBody2D
+
+
+@export var max_ammo = 10
+@export var ammo_used = 1
+var cur_ammo = max_ammo
+@onready var healthpoints = 60.0
+@onready var healthcur = healthpoints
+var direction: Vector2 = Vector2(1,1)
+@export var speed: int = 100
+var dir
+
+
+signal shoot(_pos: Vector2, dir: Vector2) 
+signal reload()
+
+@onready var ui = $UI/Control/MarginContainer/VBoxContainer
+@onready var pausescreen = preload(\"res://Scenes/UserInterface/pause_screen.tscn\").instantiate()
+@onready var animated_sprite = $AnimatedSprite2D
+@onready var timer = $\"Timer&Sounds/LocalReload\"
+@onready var lebensbalken = $UI/Leben/HealthBar
+@onready var munitionLabl = $UI/Munition/VBoxContainer/MunitionLabel
+@onready var sound = $\"Timer&Sounds/HurtSnd\"
+@onready var deathsound = $\"Timer&Sounds/Deathsound\"
+@onready var MenuScreenFade = $MenuScreenFade
+@onready var deathtimer = $\"Timer&Sounds/Deathtimer\"
+@onready var gun = $Node2D/Sprite2D
+@onready var player = $AnimatedSprite2D
+
+
+func animation():
+	dir = get_local_mouse_position()
+	if direction:
+		animated_sprite.play(\"for_right\")
+		animated_sprite.flip_h = direction.x < 0
+	else:
+		if dir.x > 0:
+			animated_sprite.play(\"idle_right\")
+		elif dir.x < 0:
+			animated_sprite.play(\"idle_left\")
+
+
+func _on_hurtbox_hurt(damage):
+	healthcur -= damage
+	set_healthbar(healthcur, healthpoints)
+	sound.play()
+	if healthcur <= 0.0:
+		death()
+
+func set_healthbar(set_value, set_max_value):
+	lebensbalken.value = set_value
+	lebensbalken.max_value = set_max_value
+
+
+func update_healthbar(heal):
+	healthcur += heal
+	if healthcur >= 60.0:
+		healthcur = healthpoints
+	else:
+		lebensbalken.value = healthcur
+		return healthcur
+
+
+func ammo_calc():
+	if not timer.is_stopped():
+		return
+	if Input.is_action_just_pressed(\"shoot\"):
+		cur_ammo -= ammo_used
+		if cur_ammo >= 0:
+			munitionLabl.text = str(cur_ammo)+ \"/\" + str(max_ammo)
+		elif cur_ammo<=0:
+			munitionLabl.text = str(0) + \"/\" + str(max_ammo)
+	elif Input.is_action_just_pressed(\"reload\") and cur_ammo<max_ammo:
+		ammo_update()
+
+
+func ammo_update():
+	timer.start()
+	cur_ammo = max_ammo
+
+
+func _ready() -> void:
+	pass
+
+
+func _physics_process(_float):
+	if Input.is_action_just_pressed(\"MenuButton\"):
+		pass
+	if cur_ammo >=0:
+		ammo_calc()
+	else:
+		ammo_update()
+	direction = Input.get_vector(\"left\", \"right\", \"up\", \"down\")
+	velocity = direction * speed
+	animation()
+	move_and_slide()
+
+
+
+func _on_local_reload_timeout() -> void:
+	munitionLabl.text = str(cur_ammo)+ \"/\" + str(max_ammo)
+
+
+func _on_pickuparea_area_entered(area: Area2D) -> void:
+	if area.is_in_group(\"loot\"):
+		area.target = self
+
+
+func _on_collectarea_area_entered(area: Area2D) -> void:
+	if area.is_in_group(\"loot\"):
+		var health = area.collect()
+		update_healthbar(health)
+
+
+func death():
+	gun.hide()
+	player.hide()
+	deathsound.play()
+	MenuScreenFade.show()
+	$MenuScreenFade/AnimationTree.play(\"fade_in\")
+	deathtimer.start()
+
+
+
+func _on_deathtimer_timeout() -> void:
+	get_tree().change_scene_to_file(\"res://Scenes/UserInterface/EndScreen.tscn\")
+"
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ik7gq"]
+size = Vector2(1.875, 5)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5rpka"]
+atlas = ExtResource("1_cvnsp")
+region = Rect2(32, 96, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nwo8a"]
+atlas = ExtResource("1_cvnsp")
+region = Rect2(64, 96, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fampp"]
+atlas = ExtResource("1_cvnsp")
+region = Rect2(96, 96, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_46tt1"]
+atlas = ExtResource("1_cvnsp")
+region = Rect2(128, 96, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rj054"]
+atlas = ExtResource("1_cvnsp")
+region = Rect2(192, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3vsyq"]
+atlas = ExtResource("1_cvnsp")
+region = Rect2(160, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vq6bo"]
+atlas = ExtResource("1_cvnsp")
+region = Rect2(128, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rc6nt"]
+atlas = ExtResource("1_cvnsp")
+region = Rect2(96, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_igrcy"]
+atlas = ExtResource("1_cvnsp")
+region = Rect2(224, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fs7ks"]
+atlas = ExtResource("1_cvnsp")
+region = Rect2(192, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_l6n3p"]
+atlas = ExtResource("1_cvnsp")
+region = Rect2(160, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_olqyp"]
+atlas = ExtResource("1_cvnsp")
+region = Rect2(128, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wpjfl"]
+atlas = ExtResource("1_cvnsp")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_s4ppl"]
+atlas = ExtResource("1_cvnsp")
+region = Rect2(224, 96, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_s8yk7"]
+atlas = ExtResource("1_cvnsp")
+region = Rect2(224, 64, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2ttdi"]
+atlas = ExtResource("1_cvnsp")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1nc73"]
+atlas = ExtResource("1_cvnsp")
+region = Rect2(0, 32, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_3smsa"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5rpka")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nwo8a")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fampp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_46tt1")
+}],
+"loop": true,
+"name": &"back_left",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rj054")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3vsyq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vq6bo")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rc6nt")
+}],
+"loop": true,
+"name": &"back_right",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_igrcy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fs7ks")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_l6n3p")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_olqyp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wpjfl")
+}],
+"loop": true,
+"name": &"for_right",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_s4ppl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_s8yk7")
+}],
+"loop": true,
+"name": &"idle_left",
+"speed": 1.5
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2ttdi")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1nc73")
+}],
+"loop": true,
+"name": &"idle_right",
+"speed": 1.5
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2ttdi"]
+size = Vector2(2.5, 6)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_s8yk7"]
+radius = 17.00735
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_2ttdi"]
+radius = 3.0
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_vq6bo"]
+streams_count = 2
+stream_0/stream = ExtResource("5_rj054")
+stream_1/stream = ExtResource("6_3vsyq")
+
+[node name="Player" type="CharacterBody2D" groups=["player"]]
+position = Vector2(532, 316)
+scale = Vector2(2, 2)
+collision_layer = 49
+collision_mask = 49
+platform_floor_layers = 4294901809
+platform_wall_layers = 49
+script = SubResource("GDScript_vgqql")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0.1875, 0)
+shape = SubResource("RectangleShape2D_ik7gq")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+light_mask = 3
+visibility_layer = 3
+position = Vector2(0, -1)
+scale = Vector2(0.3125, 0.3125)
+sprite_frames = SubResource("SpriteFrames_3smsa")
+animation = &"idle_right"
+autoplay = "for_right"
+
+[node name="Hurtbox" parent="." instance=ExtResource("4_1nc73")]
+collision_layer = 2
+collision_mask = 2
+audio_bus_name = &"SFX"
+
+[node name="CollisionShape2D" parent="Hurtbox" index="0"]
+light_mask = 2
+visibility_layer = 2
+position = Vector2(0.25, 0)
+shape = SubResource("RectangleShape2D_2ttdi")
+debug_color = Color(7.219613e-08, 0.20953652, 0.2507157, 0.41960785)
+
+[node name="Node2D" parent="." instance=ExtResource("4_vgqql")]
+position = Vector2(0.5, -0.5)
+
+[node name="Camera2D" type="Camera2D" parent="."]
+scale = Vector2(2, 2)
+zoom = Vector2(4, 4)
+limit_left = -180
+limit_top = -450
+limit_right = 1420
+limit_bottom = 450
+position_smoothing_enabled = true
+position_smoothing_speed = 20.0
+
+[node name="pickuparea" type="Area2D" parent="."]
+collision_layer = 8
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="pickuparea"]
+position = Vector2(0.5, -0.5)
+shape = SubResource("CircleShape2D_s8yk7")
+
+[node name="collectarea" type="Area2D" parent="."]
+collision_layer = 8
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="collectarea"]
+position = Vector2(0.5, -0.5)
+shape = SubResource("CircleShape2D_2ttdi")
+
+[node name="UI" parent="." instance=ExtResource("4_2ttdi")]
+
+[node name="MunitionLabel" parent="UI/Munition/VBoxContainer" index="0"]
+text = ""
+
+[node name="PauseScreen" parent="UI/Control/MarginContainer/VBoxContainer" index="0" instance=ExtResource("9_5rpka")]
+process_mode = 3
+layout_mode = 2
+
+[node name="MenuScreenFade" parent="." instance=ExtResource("9_rc6nt")]
+visible = false
+offset_left = -1272.0
+offset_top = -921.0
+offset_right = 1541.0
+offset_bottom = 928.0
+
+[node name="Timer&Sounds" type="Node2D" parent="."]
+
+[node name="Deathtimer" type="Timer" parent="Timer&Sounds"]
+wait_time = 1.5
+one_shot = true
+
+[node name="Deathsound" type="AudioStreamPlayer" parent="Timer&Sounds"]
+stream = ExtResource("8_rc6nt")
+volume_db = -5.0
+pitch_scale = 1.2
+bus = &"SFX"
+
+[node name="LocalReload" type="Timer" parent="Timer&Sounds"]
+wait_time = 2.0
+one_shot = true
+
+[node name="HurtSnd" type="AudioStreamPlayer" parent="Timer&Sounds"]
+stream = SubResource("AudioStreamRandomizer_vq6bo")
+pitch_scale = 1.5
+bus = &"SFX"
+
+[node name="Node2D2" parent="." instance=ExtResource("10_5rpka")]
+
+[connection signal="hurt" from="Hurtbox" to="." method="_on_hurtbox_hurt"]
+[connection signal="timeout" from="Node2D/reload" to="." method="_on_reload_timeout"]
+[connection signal="area_entered" from="pickuparea" to="." method="_on_pickuparea_area_entered"]
+[connection signal="area_entered" from="collectarea" to="." method="_on_collectarea_area_entered"]
+[connection signal="timeout" from="Timer&Sounds/Deathtimer" to="." method="_on_deathtimer_timeout"]
+[connection signal="timeout" from="Timer&Sounds/LocalReload" to="." method="_on_local_reload_timeout"]
+
+[editable path="Hurtbox"]
+[editable path="Node2D"]
+[editable path="UI"]
+[editable path="UI/Control/MarginContainer/VBoxContainer/PauseScreen"]

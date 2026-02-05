@@ -1,38 +1,22 @@
 [gd_scene load_steps=6 format=3 uid="uid://dvqmxgssyakwb"]
 
-[ext_resource type="Script" uid="uid://cpy151ed30dpd" path="res://Scripts/bullet.gd" id="1_41ubq"]
-[ext_resource type="Texture2D" uid="uid://di0e4xnpjlske" path="res://Bilder/Bilder/kugel.png" id="2_ygsnr"]
-[ext_resource type="PackedScene" uid="uid://xfbnk5g2f1pp" path="res://Scenes/ShallowScenes/hitbox.tscn" id="3_mfqck"]
+[ext_resource type="Script" uid="uid://cpy151ed30dpd" path="res://Scripts/Stats für Spieler und Gegner/bullet.gd" id="1_41ubq"]
+[ext_resource type="Texture2D" uid="uid://di0e4xnpjlske" path="res://Bilder/Tilemaps/kugel.png" id="2_ygsnr"]
+[ext_resource type="PackedScene" uid="uid://b6wddje0sg1w7" path="res://Scenes/ShallowScenes/Bullet_Hitbox.tscn" id="3_okk17"]
 [ext_resource type="AudioStream" uid="uid://d3goldq8cm3ui" path="res://assets/SFX/sniper-rifle-firing.mp3" id="4_okk17"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_okk17"]
-size = Vector2(5.3076925, 5)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1p0yg"]
+size = Vector2(4, 3)
 
-[node name="Bullet" type="Area2D" groups=["attack"]]
+[node name="Bullet" type="Node2D" groups=["attack"]]
 top_level = true
 light_mask = 4
 visibility_layer = 4
 position = Vector2(0, 1)
-collision_layer = 4
-collision_mask = 4
 script = ExtResource("1_41ubq")
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 4.0
-
-[node name="Hitbox" parent="." instance=ExtResource("3_mfqck")]
-collision_layer = 4
-collision_mask = 4
-
-[node name="CollisionShape2D" parent="Hitbox" index="0"]
-position = Vector2(0.275, -0.75)
-scale = Vector2(0.65, 0.5)
-shape = SubResource("RectangleShape2D_okk17")
-
-[node name="Sprite2D" type="Sprite2D" parent="Hitbox"]
-position = Vector2(5.4999995, 3.5000002)
-scale = Vector2(0.75, 0.75)
-texture = ExtResource("2_ygsnr")
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("4_okk17")
@@ -41,7 +25,17 @@ pitch_scale = 5.0
 autoplay = true
 bus = &"SFX"
 
-[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
-[connection signal="body_entered" from="Hitbox" to="." method="_on_hitbox_body_entered"]
+[node name="Node2D" parent="." instance=ExtResource("3_okk17")]
 
-[editable path="Hitbox"]
+[node name="CollisionShape2D" parent="Node2D" index="0"]
+position = Vector2(-5.9604645e-08, -0.5)
+shape = SubResource("RectangleShape2D_1p0yg")
+
+[node name="Sprite2D" type="Sprite2D" parent="Node2D"]
+position = Vector2(5.4999995, 3.5)
+scale = Vector2(0.75, 0.75)
+texture = ExtResource("2_ygsnr")
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+
+[editable path="Node2D"]
