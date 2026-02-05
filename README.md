@@ -1,3 +1,1 @@
-# Mein erstes Projekt
-
-## BITTE NETT SEIN
+# Survivors-Like Videospiel
