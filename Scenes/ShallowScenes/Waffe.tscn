@@ -1,31 +1,32 @@
-[gd_scene load_steps=4 format=3 uid="uid://o7qc7uhlib0y"]
+[gd_scene format=3 uid="uid://o7qc7uhlib0y"]
 
 [ext_resource type="Texture2D" uid="uid://mk5gstxah2s8" path="res://Bilder/Tilemaps/Jagdgewehr.png" id="1_fgwse"]
 [ext_resource type="Script" uid="uid://ddg3bqm61rfuw" path="res://Scripts/Stats für Spieler und Gegner/waffe.gd" id="1_n1sfj"]
 [ext_resource type="AudioStream" uid="uid://c7iw32oons6xs" path="res://assets/SFX/gun-full-reload.mp3" id="3_6dj31"]
 
-[node name="Node2D" type="Node2D"]
+[node name="Node2D" type="Node2D" unique_id=1317620408]
+position = Vector2(572, 327)
 script = ExtResource("1_n1sfj")
 
-[node name="Marker2D" type="Marker2D" parent="."]
+[node name="Marker2D" type="Marker2D" parent="." unique_id=220671123]
 position = Vector2(7.3, 0)
 gizmo_extents = 0.0
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=2029710627]
 position = Vector2(2, -2.2e-44)
 scale = Vector2(0.3888889, 0.26562497)
 texture = ExtResource("1_fgwse")
 region_enabled = true
 region_rect = Rect2(64, 49, 27, 11)
 
-[node name="fire_rate" type="Timer" parent="."]
+[node name="fire_rate" type="Timer" parent="." unique_id=1006786974]
 wait_time = 0.2
 
-[node name="reload" type="Timer" parent="."]
+[node name="reload" type="Timer" parent="." unique_id=836049236]
 wait_time = 2.0
 one_shot = true
 
-[node name="ReloadSound" type="AudioStreamPlayer" parent="."]
+[node name="ReloadSound" type="AudioStreamPlayer" parent="." unique_id=1002770001]
 stream = ExtResource("3_6dj31")
 volume_db = -10.0
 pitch_scale = 1.38

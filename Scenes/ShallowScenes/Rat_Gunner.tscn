@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://5lw6uvsgwm3i"]
+[gd_scene format=3 uid="uid://5lw6uvsgwm3i"]
 
 [ext_resource type="Script" uid="uid://eo7qyg1tvyyk" path="res://Scripts/Stats für Spieler und Gegner/rat_gunner.gd" id="1_kwbg6"]
 [ext_resource type="AudioStream" uid="uid://bxqh6enh2cpit" path="res://assets/SFX/Squeak_1.mp3" id="2_2kj8t"]
@@ -75,18 +75,19 @@ animations = [{
 "speed": 5.0
 }]
 
-[node name="Rat_gunner" type="CharacterBody2D" groups=["enemy"]]
+[node name="Rat_gunner" type="CharacterBody2D" unique_id=85414628 groups=["enemy"]]
 top_level = true
 collision_layer = 3
 collision_mask = 3
 script = ExtResource("1_kwbg6")
 
-[node name="RayCast2D" type="RayCast2D" parent="."]
+[node name="RayCast2D" type="RayCast2D" parent="." unique_id=1497094302]
 exclude_parent = false
 collision_mask = 2
 collide_with_areas = true
 
-[node name="debug" type="Label" parent="."]
+[node name="debug" type="Label" parent="." unique_id=452939165]
+visible = false
 offset_left = -20.0
 offset_top = -33.0
 offset_right = 21.0
@@ -96,36 +97,36 @@ label_settings = SubResource("LabelSettings_eo3u7")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="rat_hit" type="AudioStreamPlayer" parent="."]
+[node name="rat_hit" type="AudioStreamPlayer" parent="." unique_id=1435915558]
 stream = SubResource("AudioStreamRandomizer_kwbg6")
 volume_db = -10.0
 bus = &"SFX"
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1311463599]
 position = Vector2(-0.5, 0)
 shape = SubResource("RectangleShape2D_2pwpe")
 
-[node name="AnimationTree" type="AnimatedSprite2D" parent="."]
+[node name="AnimationTree" type="AnimatedSprite2D" parent="." unique_id=391422208]
 sprite_frames = SubResource("SpriteFrames_rl835")
 animation = &"Idle"
 autoplay = "Idle"
 
-[node name="Finite_State_Machine" type="Node2D" parent="."]
+[node name="Finite_State_Machine" type="Node2D" parent="." unique_id=1137196935]
 script = ExtResource("5_kwbg6")
 
-[node name="Follow" type="Node2D" parent="Finite_State_Machine"]
+[node name="Follow" type="Node2D" parent="Finite_State_Machine" unique_id=1627553619]
 script = ExtResource("8_p4d6a")
 
-[node name="Shooting" type="Node2D" parent="Finite_State_Machine"]
+[node name="Shooting" type="Node2D" parent="Finite_State_Machine" unique_id=1019491932]
 script = ExtResource("7_c5hea")
 bullet_node = ExtResource("8_rl835")
 
-[node name="Shoot_Timer" type="Timer" parent="Finite_State_Machine/Shooting"]
+[node name="Shoot_Timer" type="Timer" parent="Finite_State_Machine/Shooting" unique_id=1742608855]
 wait_time = 1.5
 
-[node name="Reload_Timer" type="Timer" parent="Finite_State_Machine/Shooting"]
+[node name="Reload_Timer" type="Timer" parent="Finite_State_Machine/Shooting" unique_id=1081697699]
 
-[node name="Hurtbox" parent="." instance=ExtResource("5_2pwpe")]
+[node name="Hurtbox" parent="." unique_id=1259035800 instance=ExtResource("5_2pwpe")]
 collision_layer = 4
 collision_mask = 4
 HurtBoxType = 1

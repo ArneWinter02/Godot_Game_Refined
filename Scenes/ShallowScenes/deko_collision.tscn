@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://ogwns5datvxm"]
+[gd_scene format=3 uid="uid://ogwns5datvxm"]
 
 [ext_resource type="Texture2D" uid="uid://v11sapculir4" path="res://Bilder/Tilemaps/Bäume.png" id="1_ytbuc"]
 
@@ -18,161 +18,170 @@ region = Rect2(13, 19, 28, 45)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6ue3e"]
 size = Vector2(7, 37.5)
 
-[node name="Deko_Collision" type="Node2D"]
+[node name="Deko_Collision" type="Node2D" unique_id=27388784]
 y_sort_enabled = true
 
-[node name="Nadel" type="StaticBody2D" parent="."]
+[node name="Nadel" type="StaticBody2D" parent="." unique_id=1124124485]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Nadel"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Nadel" unique_id=114896409]
+visible = false
 position = Vector2(66, 8.25)
 shape = SubResource("RectangleShape2D_mvuad")
 
-[node name="KleineNadel" type="Sprite2D" parent="Nadel/CollisionShape2D"]
+[node name="KleineNadel" type="Sprite2D" parent="Nadel/CollisionShape2D" unique_id=2109623507]
 position = Vector2(1, -6.25)
 texture = ExtResource("1_ytbuc")
 region_enabled = true
 region_rect = Rect2(221, 34, 18, 30)
 
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="Nadel"]
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Nadel" unique_id=385419933]
+visible = false
 position = Vector2(66, 8.25)
 shape = SubResource("RectangleShape2D_mvuad")
 
-[node name="KleineNadel3" type="Sprite2D" parent="Nadel/CollisionShape2D2"]
+[node name="KleineNadel3" type="Sprite2D" parent="Nadel/CollisionShape2D2" unique_id=500055825]
 position = Vector2(1, -6.25)
 texture = ExtResource("1_ytbuc")
 region_enabled = true
 region_rect = Rect2(221, 34, 18, 30)
 
-[node name="CollisionShape2D3" type="CollisionShape2D" parent="Nadel"]
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="Nadel" unique_id=633057167]
+visible = false
 position = Vector2(66, 8.25)
 shape = SubResource("RectangleShape2D_mvuad")
 
-[node name="KleineNadel2" type="Sprite2D" parent="Nadel/CollisionShape2D3"]
+[node name="KleineNadel2" type="Sprite2D" parent="Nadel/CollisionShape2D3" unique_id=1046303749]
 position = Vector2(1, -6.25)
 texture = ExtResource("1_ytbuc")
 region_enabled = true
 region_rect = Rect2(221, 34, 18, 30)
 
-[node name="CollisionShape2D4" type="CollisionShape2D" parent="Nadel"]
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="Nadel" unique_id=1428006484]
+visible = false
 position = Vector2(37, -2.5)
 shape = SubResource("RectangleShape2D_kl751")
 
-[node name="GroßeNadel2" type="Sprite2D" parent="Nadel/CollisionShape2D4"]
+[node name="GroßeNadel2" type="Sprite2D" parent="Nadel/CollisionShape2D4" unique_id=59734156]
 position = Vector2(1, -8.5)
 texture = ExtResource("1_ytbuc")
 region_enabled = true
 region_rect = Rect2(146, 12, 26, 52)
 
-[node name="CollisionShape2D5" type="CollisionShape2D" parent="Nadel"]
+[node name="CollisionShape2D5" type="CollisionShape2D" parent="Nadel" unique_id=946500248]
+visible = false
 position = Vector2(37, -2.5)
 shape = SubResource("RectangleShape2D_kl751")
 
-[node name="GroßeNadel" type="Sprite2D" parent="Nadel/CollisionShape2D5"]
+[node name="GroßeNadel" type="Sprite2D" parent="Nadel/CollisionShape2D5" unique_id=1325503162]
 position = Vector2(1, -8.5)
 texture = ExtResource("1_ytbuc")
 region_enabled = true
 region_rect = Rect2(146, 12, 26, 52)
 
-[node name="CollisionShape2D6" type="CollisionShape2D" parent="Nadel"]
+[node name="CollisionShape2D6" type="CollisionShape2D" parent="Nadel" unique_id=1659862254]
+visible = false
 position = Vector2(37, -2.5)
 shape = SubResource("RectangleShape2D_kl751")
 
-[node name="GroßeNadel4" type="Sprite2D" parent="Nadel/CollisionShape2D6"]
+[node name="GroßeNadel4" type="Sprite2D" parent="Nadel/CollisionShape2D6" unique_id=945922598]
 position = Vector2(1, -8.5)
 texture = ExtResource("1_ytbuc")
 region_enabled = true
 region_rect = Rect2(146, 12, 26, 52)
 
-[node name="CollisionShape2D7" type="CollisionShape2D" parent="Nadel"]
+[node name="CollisionShape2D7" type="CollisionShape2D" parent="Nadel" unique_id=2035855019]
+visible = false
 position = Vector2(45.5, 4.5)
 shape = SubResource("RectangleShape2D_kl751")
 
-[node name="GroßeNadel3" type="Sprite2D" parent="Nadel/CollisionShape2D7"]
+[node name="GroßeNadel3" type="Sprite2D" parent="Nadel/CollisionShape2D7" unique_id=1491361210]
 position = Vector2(1, -8.5)
 texture = ExtResource("1_ytbuc")
 region_enabled = true
 region_rect = Rect2(146, 12, 26, 52)
 
-[node name="CollisionShape2D8" type="CollisionShape2D" parent="Nadel"]
+[node name="CollisionShape2D8" type="CollisionShape2D" parent="Nadel" unique_id=613259284]
+visible = false
 y_sort_enabled = true
 position = Vector2(68.375, 14.5)
 shape = SubResource("RectangleShape2D_mvuad")
 
-[node name="KleineNadel4" type="Sprite2D" parent="Nadel/CollisionShape2D8"]
+[node name="KleineNadel4" type="Sprite2D" parent="Nadel/CollisionShape2D8" unique_id=1890521131]
 position = Vector2(1, -6.25)
 texture = ExtResource("1_ytbuc")
 region_enabled = true
 region_rect = Rect2(221, 34, 18, 30)
 
-[node name="Baum" type="StaticBody2D" parent="."]
+[node name="Baum" type="StaticBody2D" parent="." unique_id=727586425]
 
-[node name="CollisionShape2D5" type="CollisionShape2D" parent="Baum"]
+[node name="CollisionShape2D5" type="CollisionShape2D" parent="Baum" unique_id=1387931736]
+visible = false
 position = Vector2(-27, 14.5)
 shape = SubResource("RectangleShape2D_ytbuc")
 
-[node name="KleinerBaum" type="Sprite2D" parent="Baum/CollisionShape2D5"]
+[node name="KleinerBaum" type="Sprite2D" parent="Baum/CollisionShape2D5" unique_id=2015461300]
 position = Vector2(1, -5)
 texture = SubResource("AtlasTexture_6ue3e")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Baum"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Baum" unique_id=1833414799]
 position = Vector2(-182, 4)
 shape = SubResource("RectangleShape2D_6ue3e")
 
-[node name="GroßerBaum" type="Sprite2D" parent="Baum/CollisionShape2D"]
+[node name="GroßerBaum" type="Sprite2D" parent="Baum/CollisionShape2D" unique_id=2139927146]
 position = Vector2(0, -5.5)
 texture = ExtResource("1_ytbuc")
 region_enabled = true
 region_rect = Rect2(77, 3, 39, 61)
 
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="Baum"]
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Baum" unique_id=1946067601]
 position = Vector2(-115, 37)
 shape = SubResource("RectangleShape2D_6ue3e")
 
-[node name="GroßerBaum4" type="Sprite2D" parent="Baum/CollisionShape2D2"]
+[node name="GroßerBaum4" type="Sprite2D" parent="Baum/CollisionShape2D2" unique_id=1144714195]
 position = Vector2(-2, -6.5)
 texture = ExtResource("1_ytbuc")
 region_enabled = true
 region_rect = Rect2(77, 3, 39, 61)
 
-[node name="CollisionShape2D3" type="CollisionShape2D" parent="Baum"]
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="Baum" unique_id=1197471658]
 position = Vector2(-27, 14.5)
 shape = SubResource("RectangleShape2D_ytbuc")
 
-[node name="KleinerBaum2" type="Sprite2D" parent="Baum/CollisionShape2D3"]
+[node name="KleinerBaum2" type="Sprite2D" parent="Baum/CollisionShape2D3" unique_id=888718466]
 position = Vector2(1, -5)
 texture = SubResource("AtlasTexture_6ue3e")
 
-[node name="CollisionShape2D4" type="CollisionShape2D" parent="Baum"]
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="Baum" unique_id=1817976903]
 position = Vector2(-27, 10.8125)
 shape = SubResource("RectangleShape2D_ytbuc")
 
-[node name="KleinerBaum3" type="Sprite2D" parent="Baum/CollisionShape2D4"]
+[node name="KleinerBaum3" type="Sprite2D" parent="Baum/CollisionShape2D4" unique_id=242584520]
 position = Vector2(1, -5)
 texture = SubResource("AtlasTexture_6ue3e")
 
-[node name="CollisionShape2D6" type="CollisionShape2D" parent="Baum"]
+[node name="CollisionShape2D6" type="CollisionShape2D" parent="Baum" unique_id=2012584797]
 position = Vector2(-21, 22.25)
 shape = SubResource("RectangleShape2D_ytbuc")
 
-[node name="KleinerBaum4" type="Sprite2D" parent="Baum/CollisionShape2D6"]
+[node name="KleinerBaum4" type="Sprite2D" parent="Baum/CollisionShape2D6" unique_id=903564085]
 position = Vector2(1, -8)
 texture = SubResource("AtlasTexture_6ue3e")
 
-[node name="CollisionShape2D7" type="CollisionShape2D" parent="Baum"]
+[node name="CollisionShape2D7" type="CollisionShape2D" parent="Baum" unique_id=1444216150]
 position = Vector2(-160, -64.75)
 shape = SubResource("RectangleShape2D_6ue3e")
 
-[node name="GroßerBaum2" type="Sprite2D" parent="Baum/CollisionShape2D7"]
+[node name="GroßerBaum2" type="Sprite2D" parent="Baum/CollisionShape2D7" unique_id=1987641074]
 position = Vector2(0, -5.5)
 texture = ExtResource("1_ytbuc")
 region_enabled = true
 region_rect = Rect2(77, 3, 39, 61)
 
-[node name="CollisionShape2D8" type="CollisionShape2D" parent="Baum"]
+[node name="CollisionShape2D8" type="CollisionShape2D" parent="Baum" unique_id=127975642]
 position = Vector2(-119, -72.5)
 shape = SubResource("RectangleShape2D_6ue3e")
 
-[node name="GroßerBaum3" type="Sprite2D" parent="Baum/CollisionShape2D8"]
+[node name="GroßerBaum3" type="Sprite2D" parent="Baum/CollisionShape2D8" unique_id=482929116]
 position = Vector2(0, -5.5)
 texture = ExtResource("1_ytbuc")
 region_enabled = true
